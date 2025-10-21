@@ -34,7 +34,7 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
     lv_textarea_set_password_mode(ui->ui_comm_uart_ta_rx_buf, false);
     lv_textarea_set_one_line(ui->ui_comm_uart_ta_rx_buf, false);
     lv_textarea_set_accepted_chars(ui->ui_comm_uart_ta_rx_buf, "");
-    lv_textarea_set_max_length(ui->ui_comm_uart_ta_rx_buf, 32);
+    lv_textarea_set_max_length(ui->ui_comm_uart_ta_rx_buf, 512);
 #if LV_USE_KEYBOARD != 0 || LV_USE_ZH_KEYBOARD != 0
     lv_obj_add_event_cb(ui->ui_comm_uart_ta_rx_buf, ta_event_cb, LV_EVENT_ALL, ui->g_kb_top_layer);
 #endif
@@ -45,7 +45,7 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
     lv_obj_set_style_text_color(ui->ui_comm_uart_ta_rx_buf, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui->ui_comm_uart_ta_rx_buf, &lv_font_montserratMedium_12, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_uart_ta_rx_buf, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_letter_space(ui->ui_comm_uart_ta_rx_buf, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_letter_space(ui->ui_comm_uart_ta_rx_buf, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui->ui_comm_uart_ta_rx_buf, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui->ui_comm_uart_ta_rx_buf, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_bg_color(ui->ui_comm_uart_ta_rx_buf, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -710,6 +710,9 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
     lv_obj_set_style_text_align(ui->ui_comm_uart_btn_back, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
 
     //The custom code of ui_comm_uart.
+    // lv_obj_clear_state(guider_ui.ui_comm_uart_ta_rx_buf, LV_STATE_EDITED); // 关键：禁用编辑状态
+    lv_obj_clear_flag(guider_ui.ui_comm_uart_ta_rx_buf, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_clear_flag(guider_ui.ui_comm_uart_ta_rx_buf, LV_OBJ_FLAG_CLICK_FOCUSABLE);
 
 
     //Update current screen layout.

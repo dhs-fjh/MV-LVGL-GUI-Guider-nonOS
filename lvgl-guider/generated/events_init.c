@@ -19,11 +19,16 @@
 #include "custom.h"
 #if GUI_SIMULATOR != 1
 #include "driver_log.h"
+#include "hal_delay.h"
+
+#include <string.h>
+#include <stdio.h>
+static const hal_delay_interface_t *hal_delay = NULL;
 #endif
 /****************** ui main↑ ******************/
+/****************** ui main uart↓ ******************/
 #if GUI_SIMULATOR != 1
 #include "driver_cmd.h"
-#include <string.h>
 
 // 静态变量：定时器
 static lv_timer_t *uart_scan_timer = NULL;
@@ -38,6 +43,10 @@ static void uart_scan_timer_cb(lv_timer_t *timer) {
     if (!cmd || !cmd->msg)
         return;
 
+    // 检查是否启用时间戳
+    bool time_stamp_enabled =
+        lv_obj_has_state(ui->ui_comm_uart_cb_time_stamp, LV_STATE_CHECKED);
+
     // 扫描所有缓冲区，查找新数据
     for (uint8_t i = 0; i < CMD_RX_BUFFER_COUNT; i++) {
         cmd_msg_t *msg = &(cmd->msg[i]);
@@ -49,28 +58,43 @@ static void uart_scan_timer_cb(lv_timer_t *timer) {
                 msg->data[msg->length] = '\0';
             }
 
+            // 准备要显示的数据（可能带时间戳）
+            char display_data[CMD_RX_BUFFER_SIZE + 32];
+            if (time_stamp_enabled && hal_delay) {
+                uint32_t tick = hal_delay->get_tick();
+                snprintf(display_data, sizeof(display_data), "[%lu] %s", tick,
+                         (char *)msg->data);
+            } else {
+                snprintf(display_data, sizeof(display_data), "%s",
+                         (char *)msg->data);
+            }
+
             // 获取当前文本区内容
             const char *current_text = lv_textarea_get_text(ui->ui_comm_uart_ta_rx_buf);
             size_t current_len = strlen(current_text);
-            size_t new_data_len = msg->length;
+            size_t new_data_len = strlen(display_data);
 
             // 计算总长度（限制在 512 字节内）
             size_t total_len = current_len + new_data_len + 2; // +2 for "\r\n"
 
             if (total_len > 512) {
-                // 删除前一半内容，保留后一半
-                size_t half_len = current_len / 2;
-                const char *second_half = current_text + half_len;
+                // 删除缓冲区前 256 字节，保留后面内容，然后追加新数据
+                size_t keep_start = (current_len > 256) ? (current_len - 256) : 0;
+                size_t keep_len = current_len - keep_start;
 
-                // 创建临时缓冲区存储后一半 + 新数据
+                // 1. 构造新内容：保留的后面部分 + 换行 + 新数据
                 char temp_buf[512];
-                snprintf(temp_buf, sizeof(temp_buf), "%s\r\n%s", second_half, (char *)msg->data);
+                memcpy(temp_buf, current_text + keep_start, keep_len);
+                temp_buf[keep_len] = '\r';
+                temp_buf[keep_len + 1] = '\n';
+                memcpy(temp_buf + keep_len + 2, display_data, new_data_len);
+                temp_buf[keep_len + 2 + new_data_len] = '\0';
 
-                // 设置为新内容
+                // 2. 一次性设置新内容（自动清空旧数据）
                 lv_textarea_set_text(ui->ui_comm_uart_ta_rx_buf, temp_buf);
             } else {
                 // 追加新数据
-                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, (char *)msg->data);
+                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, display_data);
                 lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, "\r\n");
             }
 
@@ -80,6 +104,7 @@ static void uart_scan_timer_cb(lv_timer_t *timer) {
     }
 }
 #endif
+/****************** ui main uart↑ ******************/
 #include <stdlib.h>
 #include <time.h>
 
@@ -545,7 +570,7 @@ static void ui_comm_uart_event_handler (lv_event_t *e)
     switch (code) {
     case LV_EVENT_SCREEN_LOAD_START:
     {
-
+        hal_delay = hal_delay_get_interface();
         break;
     }
     case LV_EVENT_SCREEN_UNLOADED:
@@ -591,16 +616,17 @@ static void ui_comm_uart_sw_uart_event_handler (lv_event_t *e)
 #if GUI_SIMULATOR != 1
         if (status) {
             // === 打开串口监听 ===
-
             // 1. 获取当前选择的串口通道（从下拉列表）
-            current_uart_ch = lv_dropdown_get_selected(guider_ui.ui_comm_uart_ddlist_ch);
+            current_uart_ch =
+                lv_dropdown_get_selected(guider_ui.ui_comm_uart_ddlist_ch);
 
-            // 2. 清空接收文本框
+            // 2. 清空
             lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, "");
 
-            // 3. 创建定时器（每 100ms 扫描一次）
+            // 3. 创建定时器（每 5ms 扫描一次）
             if (!uart_scan_timer) {
-                uart_scan_timer = lv_timer_create(uart_scan_timer_cb, 100, &guider_ui);
+                uart_scan_timer =
+                    lv_timer_create(uart_scan_timer_cb, 5, &guider_ui);
             }
 
             LV_LOG_USER("UART monitor started on channel %d", current_uart_ch);
@@ -613,13 +639,13 @@ static void ui_comm_uart_sw_uart_event_handler (lv_event_t *e)
                 lv_timer_del(uart_scan_timer);
                 uart_scan_timer = NULL;
             }
-
             LV_LOG_USER("UART monitor stopped");
         }
 #else
         // 仿真器模式：仅显示状态
         if (status) {
-            lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, "Simulator Mode\r\nNo real UART data");
+            lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf,
+                                 "Simulator Mode\r\nNo real UART data");
         }
 #endif
         break;

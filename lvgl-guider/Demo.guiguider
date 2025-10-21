@@ -1530,7 +1530,7 @@
 								"bindCondi": "",
 								"actionList": {
 									"custom_code": {
-										"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/",
+										"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#include \"hal_delay.h\"\r\n\r\n#include <string.h>\r\n#include <stdio.h>\r\nstatic const hal_delay_interface_t *hal_delay = NULL;\r\n#endif\r\n/****************** ui main↑ ******************/",
 										"code_c": "",
 										"inc_py": "",
 										"code_py": ""
@@ -1558,8 +1558,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "ui_main"
+			]
 		},
 		{
 			"name": "ui_settings",
@@ -1907,8 +1906,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "ui_settings"
+			]
 		},
 		{
 			"name": "ui_storage",
@@ -3053,8 +3051,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "ui_storage"
+			]
 		},
 		{
 			"name": "ui_comm",
@@ -3721,8 +3718,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "ui_comm"
+			]
 		},
 		{
 			"name": "ui_comm_can",
@@ -4778,8 +4774,7 @@
 								"action": []
 							}
 						}
-					},
-					"layerName": "ui_comm_can"
+					}
 				},
 				{
 					"name": "label_can_id",
@@ -6189,8 +6184,7 @@
 					],
 					"event": {
 						"widget": {}
-					},
-					"layerName": "ui_comm_can"
+					}
 				}
 			],
 			"event": {
@@ -6248,8 +6242,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "ui_comm_can"
+			]
 		},
 		{
 			"name": "ui_comm_uart",
@@ -6258,7 +6251,7 @@
 			"version": 190,
 			"scrollbar_mode": "OFF",
 			"customer_code": {
-				"code_c": "",
+				"code_c": "// lv_obj_clear_state(guider_ui.ui_comm_uart_ta_rx_buf, LV_STATE_EDITED); // 关键：禁用编辑状态\r\nlv_obj_clear_flag(guider_ui.ui_comm_uart_ta_rx_buf, LV_OBJ_FLAG_CLICKABLE);\r\nlv_obj_clear_flag(guider_ui.ui_comm_uart_ta_rx_buf, LV_OBJ_FLAG_CLICK_FOCUSABLE);\r\n",
 				"inc_c": "",
 				"code_py": "",
 				"inc_py": "",
@@ -7267,8 +7260,7 @@
 							"bg_opa": 255,
 							"radius": 0
 						}
-					],
-					"layerName": "ui_comm_uart"
+					]
 				},
 				{
 					"name": "sw_uart",
@@ -7528,7 +7520,7 @@
 										"actionList": {
 											"custom_code": {
 												"inc_c": "",
-												"code_c": "#if GUI_SIMULATOR != 1\r\n        if (status) {\r\n            // === 打开串口监听 ===\r\n\r\n            // 1. 获取当前选择的串口通道（从下拉列表）\r\n            current_uart_ch = lv_dropdown_get_selected(guider_ui.ui_comm_uart_ddlist_ch);\r\n\r\n            // 2. 清空接收文本框\r\n            lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, \"\");\r\n\r\n            // 3. 创建定时器（每 100ms 扫描一次）\r\n            if (!uart_scan_timer) {\r\n                uart_scan_timer = lv_timer_create(uart_scan_timer_cb, 100, &guider_ui);\r\n            }\r\n\r\n            LV_LOG_USER(\"UART monitor started on channel %d\", current_uart_ch);\r\n\r\n        } else {\r\n            // === 关闭串口监听 ===\r\n\r\n            // 1. 删除定时器\r\n            if (uart_scan_timer) {\r\n                lv_timer_del(uart_scan_timer);\r\n                uart_scan_timer = NULL;\r\n            }\r\n\r\n            LV_LOG_USER(\"UART monitor stopped\");\r\n        }\r\n#else\r\n        // 仿真器模式：仅显示状态\r\n        if (status) {\r\n            lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, \"Simulator Mode\\r\\nNo real UART data\");\r\n        }\r\n#endif",
+												"code_c": "#if GUI_SIMULATOR != 1\r\n        if (status) {\r\n          // === 打开串口监听 ===\r\n          // 1. 获取当前选择的串口通道（从下拉列表）\r\n          current_uart_ch =\r\n              lv_dropdown_get_selected(guider_ui.ui_comm_uart_ddlist_ch);\r\n\r\n          // 2. 清空\r\n          lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, \"\");\r\n\r\n          // 3. 创建定时器（每 5ms 扫描一次）\r\n          if (!uart_scan_timer) {\r\n            uart_scan_timer =\r\n                lv_timer_create(uart_scan_timer_cb, 5, &guider_ui);\r\n          }\r\n\r\n          LV_LOG_USER(\"UART monitor started on channel %d\", current_uart_ch);\r\n\r\n        } else {\r\n          // === 关闭串口监听 ===\r\n\r\n          // 1. 删除定时器\r\n          if (uart_scan_timer) {\r\n            lv_timer_del(uart_scan_timer);\r\n            uart_scan_timer = NULL;\r\n          }\r\n          LV_LOG_USER(\"UART monitor stopped\");\r\n        }\r\n#else\r\n        // 仿真器模式：仅显示状态\r\n        if (status) {\r\n          lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf,\r\n                               \"Simulator Mode\\r\\nNo real UART data\");\r\n        }\r\n#endif",
 												"inc_py": "",
 												"code_py": ""
 											}
@@ -8132,7 +8124,7 @@
 					"left": 5,
 					"top": 114,
 					"visible": true,
-					"isLock": true,
+					"isLock": false,
 					"flag": [],
 					"default_style": false,
 					"text": "T",
@@ -9214,7 +9206,7 @@
 					"one_line_mode": false,
 					"placeholder": "rx buf",
 					"accept_characters": "",
-					"max_len": 32,
+					"max_len": 512,
 					"password_bullet": "*",
 					"style": [
 						{
@@ -9238,7 +9230,7 @@
 							"border_opa": 255,
 							"text_color": "#000000",
 							"text_align": "LV_TEXT_ALIGN_LEFT",
-							"letter_space": 2,
+							"letter_space": 0,
 							"shadow_color": "#2195f6",
 							"shadow_opa": 255,
 							"shadow_width": 0,
@@ -9297,8 +9289,7 @@
 							"bg_opa": 255,
 							"radius": 0
 						}
-					],
-					"layerName": "ui_comm_uart"
+					]
 				}
 			],
 			"event": {
@@ -9311,8 +9302,8 @@
 								"bindCondi": "",
 								"actionList": {
 									"custom_code": {
-										"inc_c": "#if GUI_SIMULATOR != 1\r\n#include \"driver_cmd.h\"\r\n#include <string.h>\r\n\r\n// 静态变量：定时器\r\nstatic lv_timer_t *uart_scan_timer = NULL;\r\nstatic uint8_t current_uart_ch = 0;      // 当前选择的串口通道\r\n\r\n// 定时器回调：扫描串口接收缓冲区\r\nstatic void uart_scan_timer_cb(lv_timer_t *timer) {\r\n    lv_ui *ui = (lv_ui *)timer->user_data;\r\n\r\n    // 获取 CMD 接口（使用 LOG 串口）\r\n    const driver_cmd_interface_t *cmd = driver_cmd_get_interface();\r\n    if (!cmd || !cmd->msg)\r\n        return;\r\n\r\n    // 扫描所有缓冲区，查找新数据\r\n    for (uint8_t i = 0; i < CMD_RX_BUFFER_COUNT; i++) {\r\n        cmd_msg_t *msg = &(cmd->msg[i]);\r\n\r\n        // 检查是否有新数据（rx_flag 置位）\r\n        if (msg->rx_flag && msg->length > 0) {\r\n            // 确保数据有结束符\r\n            if (msg->data[msg->length] != '\\0') {\r\n                msg->data[msg->length] = '\\0';\r\n            }\r\n\r\n            // 获取当前文本区内容\r\n            const char *current_text = lv_textarea_get_text(ui->ui_comm_uart_ta_rx_buf);\r\n            size_t current_len = strlen(current_text);\r\n            size_t new_data_len = msg->length;\r\n\r\n            // 计算总长度（限制在 512 字节内）\r\n            size_t total_len = current_len + new_data_len + 2; // +2 for \"\\r\\n\"\r\n\r\n            if (total_len > 512) {\r\n                // 删除前一半内容，保留后一半\r\n                size_t half_len = current_len / 2;\r\n                const char *second_half = current_text + half_len;\r\n\r\n                // 创建临时缓冲区存储后一半 + 新数据\r\n                char temp_buf[512];\r\n                snprintf(temp_buf, sizeof(temp_buf), \"%s\\r\\n%s\", second_half, (char *)msg->data);\r\n\r\n                // 设置为新内容\r\n                lv_textarea_set_text(ui->ui_comm_uart_ta_rx_buf, temp_buf);\r\n            } else {\r\n                // 追加新数据\r\n                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, (char *)msg->data);\r\n                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, \"\\r\\n\");\r\n            }\r\n\r\n            // 清除 rx_flag，标记已处理\r\n            msg->rx_flag = 0;\r\n        }\r\n    }\r\n}\r\n#endif",
-										"code_c": "",
+										"inc_c": "/****************** ui main uart↓ ******************/\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_cmd.h\"\r\n\r\n// 静态变量：定时器\r\nstatic lv_timer_t *uart_scan_timer = NULL;\r\nstatic uint8_t current_uart_ch = 0;      // 当前选择的串口通道\r\n\r\n// 定时器回调：扫描串口接收缓冲区\r\nstatic void uart_scan_timer_cb(lv_timer_t *timer) {\r\n    lv_ui *ui = (lv_ui *)timer->user_data;\r\n\r\n    // 获取 CMD 接口（使用 LOG 串口）\r\n    const driver_cmd_interface_t *cmd = driver_cmd_get_interface();\r\n    if (!cmd || !cmd->msg)\r\n        return;\r\n\r\n    // 检查是否启用时间戳\r\n    bool time_stamp_enabled =\r\n        lv_obj_has_state(ui->ui_comm_uart_cb_time_stamp, LV_STATE_CHECKED);\r\n\r\n    // 扫描所有缓冲区，查找新数据\r\n    for (uint8_t i = 0; i < CMD_RX_BUFFER_COUNT; i++) {\r\n        cmd_msg_t *msg = &(cmd->msg[i]);\r\n\r\n        // 检查是否有新数据（rx_flag 置位）\r\n        if (msg->rx_flag && msg->length > 0) {\r\n            // 确保数据有结束符\r\n            if (msg->data[msg->length] != '\\0') {\r\n                msg->data[msg->length] = '\\0';\r\n            }\r\n\r\n            // 准备要显示的数据（可能带时间戳）\r\n            char display_data[CMD_RX_BUFFER_SIZE + 32];\r\n            if (time_stamp_enabled && hal_delay) {\r\n              uint32_t tick = hal_delay->get_tick();\r\n              snprintf(display_data, sizeof(display_data), \"[%lu] %s\", tick,\r\n                       (char *)msg->data);\r\n            } else {\r\n              snprintf(display_data, sizeof(display_data), \"%s\",\r\n                       (char *)msg->data);\r\n            }\r\n\r\n            // 获取当前文本区内容\r\n            const char *current_text = lv_textarea_get_text(ui->ui_comm_uart_ta_rx_buf);\r\n            size_t current_len = strlen(current_text);\r\n            size_t new_data_len = strlen(display_data);\r\n\r\n            // 计算总长度（限制在 512 字节内）\r\n            size_t total_len = current_len + new_data_len + 2; // +2 for \"\\r\\n\"\r\n\r\n            if (total_len > 512) {\r\n              // 删除缓冲区前 256 字节，保留后面内容，然后追加新数据\r\n              size_t keep_start = (current_len > 256) ? (current_len - 256) : 0;\r\n              size_t keep_len = current_len - keep_start;\r\n\r\n              // 1. 构造新内容：保留的后面部分 + 换行 + 新数据\r\n              char temp_buf[512];\r\n              memcpy(temp_buf, current_text + keep_start, keep_len);\r\n              temp_buf[keep_len] = '\\r';\r\n              temp_buf[keep_len + 1] = '\\n';\r\n              memcpy(temp_buf + keep_len + 2, display_data, new_data_len);\r\n              temp_buf[keep_len + 2 + new_data_len] = '\\0';\r\n\r\n              // 2. 一次性设置新内容（自动清空旧数据）\r\n              lv_textarea_set_text(ui->ui_comm_uart_ta_rx_buf, temp_buf);\r\n            } else {\r\n                // 追加新数据\r\n                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, display_data);\r\n                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, \"\\r\\n\");\r\n            }\r\n\r\n            // 清除 rx_flag，标记已处理\r\n            msg->rx_flag = 0;\r\n        }\r\n    }\r\n}\r\n#endif\r\n/****************** ui main uart↑ ******************/",
+										"code_c": "hal_delay = hal_delay_get_interface();",
 										"inc_py": "",
 										"code_py": ""
 									}
@@ -9356,8 +9347,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "ui_comm_uart"
+			]
 		},
 		{
 			"name": "ui_comm_rc",
@@ -12415,8 +12405,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "ui_comm_rc"
+			]
 		},
 		{
 			"name": "ui_io",
@@ -12764,8 +12753,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "ui_io"
+			]
 		},
 		{
 			"name": "ui_led",
@@ -13365,8 +13353,7 @@
 								]
 							}
 						}
-					},
-					"layerName": "ui_led"
+					}
 				},
 				{
 					"name": "cb_sta",
@@ -14095,8 +14082,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "ui_led"
+			]
 		}
 	],
 	"Application": {
@@ -14146,7 +14132,7 @@
 									"bindCondi": "",
 									"actionList": {
 										"custom_code": {
-											"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/",
+											"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#include \"hal_delay.h\"\r\n\r\n#include <string.h>\r\n#include <stdio.h>\r\nstatic const hal_delay_interface_t *hal_delay = NULL;\r\n#endif\r\n/****************** ui main↑ ******************/",
 											"code_c": "",
 											"inc_py": "",
 											"code_py": ""
@@ -20718,7 +20704,7 @@
 																	"bindCondi": "",
 																	"actionList": {
 																		"custom_code": {
-																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/",
+																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#include \"hal_delay.h\"\r\n\r\n#include <string.h>\r\n#include <stdio.h>\r\nstatic const hal_delay_interface_t *hal_delay = NULL;\r\n#endif\r\n/****************** ui main↑ ******************/",
 																			"code_c": "",
 																			"inc_py": "",
 																			"code_py": ""
@@ -23237,7 +23223,7 @@
 																	"bindCondi": "",
 																	"actionList": {
 																		"custom_code": {
-																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/",
+																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#include \"hal_delay.h\"\r\n\r\n#include <string.h>\r\n#include <stdio.h>\r\nstatic const hal_delay_interface_t *hal_delay = NULL;\r\n#endif\r\n/****************** ui main↑ ******************/",
 																			"code_c": "",
 																			"inc_py": "",
 																			"code_py": ""
@@ -26081,7 +26067,7 @@
 												"version": 190,
 												"scrollbar_mode": "OFF",
 												"customer_code": {
-													"code_c": "",
+													"code_c": "// lv_obj_clear_state(guider_ui.ui_comm_uart_ta_rx_buf, LV_STATE_EDITED); // 关键：禁用编辑状态\r\nlv_obj_clear_flag(guider_ui.ui_comm_uart_ta_rx_buf, LV_OBJ_FLAG_CLICKABLE);\r\nlv_obj_clear_flag(guider_ui.ui_comm_uart_ta_rx_buf, LV_OBJ_FLAG_CLICK_FOCUSABLE);\r\n",
 													"inc_c": "",
 													"code_py": "",
 													"inc_py": "",
@@ -27351,7 +27337,7 @@
 																			"actionList": {
 																				"custom_code": {
 																					"inc_c": "",
-																					"code_c": "#if GUI_SIMULATOR != 1\r\n        if (status) {\r\n            // === 打开串口监听 ===\r\n\r\n            // 1. 获取当前选择的串口通道（从下拉列表）\r\n            current_uart_ch = lv_dropdown_get_selected(guider_ui.ui_comm_uart_ddlist_ch);\r\n\r\n            // 2. 清空接收文本框\r\n            lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, \"\");\r\n\r\n            // 3. 创建定时器（每 100ms 扫描一次）\r\n            if (!uart_scan_timer) {\r\n                uart_scan_timer = lv_timer_create(uart_scan_timer_cb, 100, &guider_ui);\r\n            }\r\n\r\n            LV_LOG_USER(\"UART monitor started on channel %d\", current_uart_ch);\r\n\r\n        } else {\r\n            // === 关闭串口监听 ===\r\n\r\n            // 1. 删除定时器\r\n            if (uart_scan_timer) {\r\n                lv_timer_del(uart_scan_timer);\r\n                uart_scan_timer = NULL;\r\n            }\r\n\r\n            LV_LOG_USER(\"UART monitor stopped\");\r\n        }\r\n#else\r\n        // 仿真器模式：仅显示状态\r\n        if (status) {\r\n            lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, \"Simulator Mode\\r\\nNo real UART data\");\r\n        }\r\n#endif",
+																					"code_c": "#if GUI_SIMULATOR != 1\r\n        if (status) {\r\n          // === 打开串口监听 ===\r\n          // 1. 获取当前选择的串口通道（从下拉列表）\r\n          current_uart_ch =\r\n              lv_dropdown_get_selected(guider_ui.ui_comm_uart_ddlist_ch);\r\n\r\n          // 2. 清空\r\n          lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, \"\");\r\n\r\n          // 3. 创建定时器（每 5ms 扫描一次）\r\n          if (!uart_scan_timer) {\r\n            uart_scan_timer =\r\n                lv_timer_create(uart_scan_timer_cb, 5, &guider_ui);\r\n          }\r\n\r\n          LV_LOG_USER(\"UART monitor started on channel %d\", current_uart_ch);\r\n\r\n        } else {\r\n          // === 关闭串口监听 ===\r\n\r\n          // 1. 删除定时器\r\n          if (uart_scan_timer) {\r\n            lv_timer_del(uart_scan_timer);\r\n            uart_scan_timer = NULL;\r\n          }\r\n          LV_LOG_USER(\"UART monitor stopped\");\r\n        }\r\n#else\r\n        // 仿真器模式：仅显示状态\r\n        if (status) {\r\n          lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf,\r\n                               \"Simulator Mode\\r\\nNo real UART data\");\r\n        }\r\n#endif",
 																					"inc_py": "",
 																					"code_py": ""
 																				}
@@ -27955,7 +27941,7 @@
 														"left": 5,
 														"top": 114,
 														"visible": true,
-														"isLock": true,
+														"isLock": false,
 														"flag": [],
 														"default_style": false,
 														"text": "T",
@@ -29037,7 +29023,7 @@
 														"one_line_mode": false,
 														"placeholder": "rx buf",
 														"accept_characters": "",
-														"max_len": 32,
+														"max_len": 512,
 														"password_bullet": "*",
 														"style": [
 															{
@@ -29061,7 +29047,7 @@
 																"border_opa": 255,
 																"text_color": "#000000",
 																"text_align": "LV_TEXT_ALIGN_LEFT",
-																"letter_space": 2,
+																"letter_space": 0,
 																"shadow_color": "#2195f6",
 																"shadow_opa": 255,
 																"shadow_width": 0,
@@ -29134,8 +29120,8 @@
 																	"bindCondi": "",
 																	"actionList": {
 																		"custom_code": {
-																			"inc_c": "#if GUI_SIMULATOR != 1\r\n#include \"driver_cmd.h\"\r\n#include <string.h>\r\n\r\n// 静态变量：定时器\r\nstatic lv_timer_t *uart_scan_timer = NULL;\r\nstatic uint8_t current_uart_ch = 0;      // 当前选择的串口通道\r\n\r\n// 定时器回调：扫描串口接收缓冲区\r\nstatic void uart_scan_timer_cb(lv_timer_t *timer) {\r\n    lv_ui *ui = (lv_ui *)timer->user_data;\r\n\r\n    // 获取 CMD 接口（使用 LOG 串口）\r\n    const driver_cmd_interface_t *cmd = driver_cmd_get_interface();\r\n    if (!cmd || !cmd->msg)\r\n        return;\r\n\r\n    // 扫描所有缓冲区，查找新数据\r\n    for (uint8_t i = 0; i < CMD_RX_BUFFER_COUNT; i++) {\r\n        cmd_msg_t *msg = &(cmd->msg[i]);\r\n\r\n        // 检查是否有新数据（rx_flag 置位）\r\n        if (msg->rx_flag && msg->length > 0) {\r\n            // 确保数据有结束符\r\n            if (msg->data[msg->length] != '\\0') {\r\n                msg->data[msg->length] = '\\0';\r\n            }\r\n\r\n            // 获取当前文本区内容\r\n            const char *current_text = lv_textarea_get_text(ui->ui_comm_uart_ta_rx_buf);\r\n            size_t current_len = strlen(current_text);\r\n            size_t new_data_len = msg->length;\r\n\r\n            // 计算总长度（限制在 512 字节内）\r\n            size_t total_len = current_len + new_data_len + 2; // +2 for \"\\r\\n\"\r\n\r\n            if (total_len > 512) {\r\n                // 删除前一半内容，保留后一半\r\n                size_t half_len = current_len / 2;\r\n                const char *second_half = current_text + half_len;\r\n\r\n                // 创建临时缓冲区存储后一半 + 新数据\r\n                char temp_buf[512];\r\n                snprintf(temp_buf, sizeof(temp_buf), \"%s\\r\\n%s\", second_half, (char *)msg->data);\r\n\r\n                // 设置为新内容\r\n                lv_textarea_set_text(ui->ui_comm_uart_ta_rx_buf, temp_buf);\r\n            } else {\r\n                // 追加新数据\r\n                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, (char *)msg->data);\r\n                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, \"\\r\\n\");\r\n            }\r\n\r\n            // 清除 rx_flag，标记已处理\r\n            msg->rx_flag = 0;\r\n        }\r\n    }\r\n}\r\n#endif",
-																			"code_c": "",
+																			"inc_c": "/****************** ui main uart↓ ******************/\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_cmd.h\"\r\n\r\n// 静态变量：定时器\r\nstatic lv_timer_t *uart_scan_timer = NULL;\r\nstatic uint8_t current_uart_ch = 0;      // 当前选择的串口通道\r\n\r\n// 定时器回调：扫描串口接收缓冲区\r\nstatic void uart_scan_timer_cb(lv_timer_t *timer) {\r\n    lv_ui *ui = (lv_ui *)timer->user_data;\r\n\r\n    // 获取 CMD 接口（使用 LOG 串口）\r\n    const driver_cmd_interface_t *cmd = driver_cmd_get_interface();\r\n    if (!cmd || !cmd->msg)\r\n        return;\r\n\r\n    // 检查是否启用时间戳\r\n    bool time_stamp_enabled =\r\n        lv_obj_has_state(ui->ui_comm_uart_cb_time_stamp, LV_STATE_CHECKED);\r\n\r\n    // 扫描所有缓冲区，查找新数据\r\n    for (uint8_t i = 0; i < CMD_RX_BUFFER_COUNT; i++) {\r\n        cmd_msg_t *msg = &(cmd->msg[i]);\r\n\r\n        // 检查是否有新数据（rx_flag 置位）\r\n        if (msg->rx_flag && msg->length > 0) {\r\n            // 确保数据有结束符\r\n            if (msg->data[msg->length] != '\\0') {\r\n                msg->data[msg->length] = '\\0';\r\n            }\r\n\r\n            // 准备要显示的数据（可能带时间戳）\r\n            char display_data[CMD_RX_BUFFER_SIZE + 32];\r\n            if (time_stamp_enabled && hal_delay) {\r\n              uint32_t tick = hal_delay->get_tick();\r\n              snprintf(display_data, sizeof(display_data), \"[%lu] %s\", tick,\r\n                       (char *)msg->data);\r\n            } else {\r\n              snprintf(display_data, sizeof(display_data), \"%s\",\r\n                       (char *)msg->data);\r\n            }\r\n\r\n            // 获取当前文本区内容\r\n            const char *current_text = lv_textarea_get_text(ui->ui_comm_uart_ta_rx_buf);\r\n            size_t current_len = strlen(current_text);\r\n            size_t new_data_len = strlen(display_data);\r\n\r\n            // 计算总长度（限制在 512 字节内）\r\n            size_t total_len = current_len + new_data_len + 2; // +2 for \"\\r\\n\"\r\n\r\n            if (total_len > 512) {\r\n              // 删除缓冲区前 256 字节，保留后面内容，然后追加新数据\r\n              size_t keep_start = (current_len > 256) ? (current_len - 256) : 0;\r\n              size_t keep_len = current_len - keep_start;\r\n\r\n              // 1. 构造新内容：保留的后面部分 + 换行 + 新数据\r\n              char temp_buf[512];\r\n              memcpy(temp_buf, current_text + keep_start, keep_len);\r\n              temp_buf[keep_len] = '\\r';\r\n              temp_buf[keep_len + 1] = '\\n';\r\n              memcpy(temp_buf + keep_len + 2, display_data, new_data_len);\r\n              temp_buf[keep_len + 2 + new_data_len] = '\\0';\r\n\r\n              // 2. 一次性设置新内容（自动清空旧数据）\r\n              lv_textarea_set_text(ui->ui_comm_uart_ta_rx_buf, temp_buf);\r\n            } else {\r\n                // 追加新数据\r\n                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, display_data);\r\n                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, \"\\r\\n\");\r\n            }\r\n\r\n            // 清除 rx_flag，标记已处理\r\n            msg->rx_flag = 0;\r\n        }\r\n    }\r\n}\r\n#endif\r\n/****************** ui main uart↑ ******************/",
+																			"code_c": "hal_delay = hal_delay_get_interface();",
 																			"inc_py": "",
 																			"code_py": ""
 																		}
@@ -33922,7 +33908,7 @@
 																	"bindCondi": "",
 																	"actionList": {
 																		"custom_code": {
-																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/",
+																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#include \"hal_delay.h\"\r\n\r\n#include <string.h>\r\n#include <stdio.h>\r\nstatic const hal_delay_interface_t *hal_delay = NULL;\r\n#endif\r\n/****************** ui main↑ ******************/",
 																			"code_c": "",
 																			"inc_py": "",
 																			"code_py": ""
@@ -37542,7 +37528,7 @@
 				"version": 190,
 				"scrollbar_mode": "OFF",
 				"customer_code": {
-					"code_c": "",
+					"code_c": "// lv_obj_clear_state(guider_ui.ui_comm_uart_ta_rx_buf, LV_STATE_EDITED); // 关键：禁用编辑状态\r\nlv_obj_clear_flag(guider_ui.ui_comm_uart_ta_rx_buf, LV_OBJ_FLAG_CLICKABLE);\r\nlv_obj_clear_flag(guider_ui.ui_comm_uart_ta_rx_buf, LV_OBJ_FLAG_CLICK_FOCUSABLE);\r\n",
 					"inc_c": "",
 					"code_py": "",
 					"inc_py": "",
@@ -37562,8 +37548,8 @@
 									"bindCondi": "",
 									"actionList": {
 										"custom_code": {
-											"inc_c": "#if GUI_SIMULATOR != 1\r\n#include \"driver_cmd.h\"\r\n#include <string.h>\r\n\r\n// 静态变量：定时器\r\nstatic lv_timer_t *uart_scan_timer = NULL;\r\nstatic uint8_t current_uart_ch = 0;      // 当前选择的串口通道\r\n\r\n// 定时器回调：扫描串口接收缓冲区\r\nstatic void uart_scan_timer_cb(lv_timer_t *timer) {\r\n    lv_ui *ui = (lv_ui *)timer->user_data;\r\n\r\n    // 获取 CMD 接口（使用 LOG 串口）\r\n    const driver_cmd_interface_t *cmd = driver_cmd_get_interface();\r\n    if (!cmd || !cmd->msg)\r\n        return;\r\n\r\n    // 扫描所有缓冲区，查找新数据\r\n    for (uint8_t i = 0; i < CMD_RX_BUFFER_COUNT; i++) {\r\n        cmd_msg_t *msg = &(cmd->msg[i]);\r\n\r\n        // 检查是否有新数据（rx_flag 置位）\r\n        if (msg->rx_flag && msg->length > 0) {\r\n            // 确保数据有结束符\r\n            if (msg->data[msg->length] != '\\0') {\r\n                msg->data[msg->length] = '\\0';\r\n            }\r\n\r\n            // 获取当前文本区内容\r\n            const char *current_text = lv_textarea_get_text(ui->ui_comm_uart_ta_rx_buf);\r\n            size_t current_len = strlen(current_text);\r\n            size_t new_data_len = msg->length;\r\n\r\n            // 计算总长度（限制在 512 字节内）\r\n            size_t total_len = current_len + new_data_len + 2; // +2 for \"\\r\\n\"\r\n\r\n            if (total_len > 512) {\r\n                // 删除前一半内容，保留后一半\r\n                size_t half_len = current_len / 2;\r\n                const char *second_half = current_text + half_len;\r\n\r\n                // 创建临时缓冲区存储后一半 + 新数据\r\n                char temp_buf[512];\r\n                snprintf(temp_buf, sizeof(temp_buf), \"%s\\r\\n%s\", second_half, (char *)msg->data);\r\n\r\n                // 设置为新内容\r\n                lv_textarea_set_text(ui->ui_comm_uart_ta_rx_buf, temp_buf);\r\n            } else {\r\n                // 追加新数据\r\n                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, (char *)msg->data);\r\n                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, \"\\r\\n\");\r\n            }\r\n\r\n            // 清除 rx_flag，标记已处理\r\n            msg->rx_flag = 0;\r\n        }\r\n    }\r\n}\r\n#endif",
-											"code_c": "",
+											"inc_c": "/****************** ui main uart↓ ******************/\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_cmd.h\"\r\n\r\n// 静态变量：定时器\r\nstatic lv_timer_t *uart_scan_timer = NULL;\r\nstatic uint8_t current_uart_ch = 0;      // 当前选择的串口通道\r\n\r\n// 定时器回调：扫描串口接收缓冲区\r\nstatic void uart_scan_timer_cb(lv_timer_t *timer) {\r\n    lv_ui *ui = (lv_ui *)timer->user_data;\r\n\r\n    // 获取 CMD 接口（使用 LOG 串口）\r\n    const driver_cmd_interface_t *cmd = driver_cmd_get_interface();\r\n    if (!cmd || !cmd->msg)\r\n        return;\r\n\r\n    // 检查是否启用时间戳\r\n    bool time_stamp_enabled =\r\n        lv_obj_has_state(ui->ui_comm_uart_cb_time_stamp, LV_STATE_CHECKED);\r\n\r\n    // 扫描所有缓冲区，查找新数据\r\n    for (uint8_t i = 0; i < CMD_RX_BUFFER_COUNT; i++) {\r\n        cmd_msg_t *msg = &(cmd->msg[i]);\r\n\r\n        // 检查是否有新数据（rx_flag 置位）\r\n        if (msg->rx_flag && msg->length > 0) {\r\n            // 确保数据有结束符\r\n            if (msg->data[msg->length] != '\\0') {\r\n                msg->data[msg->length] = '\\0';\r\n            }\r\n\r\n            // 准备要显示的数据（可能带时间戳）\r\n            char display_data[CMD_RX_BUFFER_SIZE + 32];\r\n            if (time_stamp_enabled && hal_delay) {\r\n              uint32_t tick = hal_delay->get_tick();\r\n              snprintf(display_data, sizeof(display_data), \"[%lu] %s\", tick,\r\n                       (char *)msg->data);\r\n            } else {\r\n              snprintf(display_data, sizeof(display_data), \"%s\",\r\n                       (char *)msg->data);\r\n            }\r\n\r\n            // 获取当前文本区内容\r\n            const char *current_text = lv_textarea_get_text(ui->ui_comm_uart_ta_rx_buf);\r\n            size_t current_len = strlen(current_text);\r\n            size_t new_data_len = strlen(display_data);\r\n\r\n            // 计算总长度（限制在 512 字节内）\r\n            size_t total_len = current_len + new_data_len + 2; // +2 for \"\\r\\n\"\r\n\r\n            if (total_len > 512) {\r\n              // 删除缓冲区前 256 字节，保留后面内容，然后追加新数据\r\n              size_t keep_start = (current_len > 256) ? (current_len - 256) : 0;\r\n              size_t keep_len = current_len - keep_start;\r\n\r\n              // 1. 构造新内容：保留的后面部分 + 换行 + 新数据\r\n              char temp_buf[512];\r\n              memcpy(temp_buf, current_text + keep_start, keep_len);\r\n              temp_buf[keep_len] = '\\r';\r\n              temp_buf[keep_len + 1] = '\\n';\r\n              memcpy(temp_buf + keep_len + 2, display_data, new_data_len);\r\n              temp_buf[keep_len + 2 + new_data_len] = '\\0';\r\n\r\n              // 2. 一次性设置新内容（自动清空旧数据）\r\n              lv_textarea_set_text(ui->ui_comm_uart_ta_rx_buf, temp_buf);\r\n            } else {\r\n                // 追加新数据\r\n                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, display_data);\r\n                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, \"\\r\\n\");\r\n            }\r\n\r\n            // 清除 rx_flag，标记已处理\r\n            msg->rx_flag = 0;\r\n        }\r\n    }\r\n}\r\n#endif\r\n/****************** ui main uart↑ ******************/",
+											"code_c": "hal_delay = hal_delay_get_interface();",
 											"inc_py": "",
 											"code_py": ""
 										}
@@ -37634,7 +37620,7 @@
 						"one_line_mode": false,
 						"placeholder": "rx buf",
 						"accept_characters": "",
-						"max_len": 32,
+						"max_len": 512,
 						"password_bullet": "*",
 						"style": [
 							{
@@ -37658,7 +37644,7 @@
 								"border_opa": 255,
 								"text_color": "#000000",
 								"text_align": "LV_TEXT_ALIGN_LEFT",
-								"letter_space": 2,
+								"letter_space": 0,
 								"shadow_color": "#2195f6",
 								"shadow_opa": 255,
 								"shadow_width": 0,
@@ -39389,7 +39375,7 @@
 											"actionList": {
 												"custom_code": {
 													"inc_c": "",
-													"code_c": "#if GUI_SIMULATOR != 1\r\n        if (status) {\r\n            // === 打开串口监听 ===\r\n\r\n            // 1. 获取当前选择的串口通道（从下拉列表）\r\n            current_uart_ch = lv_dropdown_get_selected(guider_ui.ui_comm_uart_ddlist_ch);\r\n\r\n            // 2. 清空接收文本框\r\n            lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, \"\");\r\n\r\n            // 3. 创建定时器（每 100ms 扫描一次）\r\n            if (!uart_scan_timer) {\r\n                uart_scan_timer = lv_timer_create(uart_scan_timer_cb, 100, &guider_ui);\r\n            }\r\n\r\n            LV_LOG_USER(\"UART monitor started on channel %d\", current_uart_ch);\r\n\r\n        } else {\r\n            // === 关闭串口监听 ===\r\n\r\n            // 1. 删除定时器\r\n            if (uart_scan_timer) {\r\n                lv_timer_del(uart_scan_timer);\r\n                uart_scan_timer = NULL;\r\n            }\r\n\r\n            LV_LOG_USER(\"UART monitor stopped\");\r\n        }\r\n#else\r\n        // 仿真器模式：仅显示状态\r\n        if (status) {\r\n            lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, \"Simulator Mode\\r\\nNo real UART data\");\r\n        }\r\n#endif",
+													"code_c": "#if GUI_SIMULATOR != 1\r\n        if (status) {\r\n          // === 打开串口监听 ===\r\n          // 1. 获取当前选择的串口通道（从下拉列表）\r\n          current_uart_ch =\r\n              lv_dropdown_get_selected(guider_ui.ui_comm_uart_ddlist_ch);\r\n\r\n          // 2. 清空\r\n          lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, \"\");\r\n\r\n          // 3. 创建定时器（每 5ms 扫描一次）\r\n          if (!uart_scan_timer) {\r\n            uart_scan_timer =\r\n                lv_timer_create(uart_scan_timer_cb, 5, &guider_ui);\r\n          }\r\n\r\n          LV_LOG_USER(\"UART monitor started on channel %d\", current_uart_ch);\r\n\r\n        } else {\r\n          // === 关闭串口监听 ===\r\n\r\n          // 1. 删除定时器\r\n          if (uart_scan_timer) {\r\n            lv_timer_del(uart_scan_timer);\r\n            uart_scan_timer = NULL;\r\n          }\r\n          LV_LOG_USER(\"UART monitor stopped\");\r\n        }\r\n#else\r\n        // 仿真器模式：仅显示状态\r\n        if (status) {\r\n          lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf,\r\n                               \"Simulator Mode\\r\\nNo real UART data\");\r\n        }\r\n#endif",
 													"inc_py": "",
 													"code_py": ""
 												}
@@ -40367,7 +40353,7 @@
 												"one_line_mode": false,
 												"placeholder": "rx buf",
 												"accept_characters": "",
-												"max_len": 32,
+												"max_len": 512,
 												"password_bullet": "*",
 												"style": [
 													{
@@ -40391,7 +40377,7 @@
 														"border_opa": 255,
 														"text_color": "#000000",
 														"text_align": "LV_TEXT_ALIGN_LEFT",
-														"letter_space": 2,
+														"letter_space": 0,
 														"shadow_color": "#2195f6",
 														"shadow_opa": 255,
 														"shadow_width": 0,
@@ -46884,7 +46870,7 @@
 																	"bindCondi": "",
 																	"actionList": {
 																		"custom_code": {
-																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/",
+																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#include \"hal_delay.h\"\r\n\r\n#include <string.h>\r\n#include <stdio.h>\r\nstatic const hal_delay_interface_t *hal_delay = NULL;\r\n#endif\r\n/****************** ui main↑ ******************/",
 																			"code_c": "",
 																			"inc_py": "",
 																			"code_py": ""
@@ -49813,7 +49799,7 @@
 																	"bindCondi": "",
 																	"actionList": {
 																		"custom_code": {
-																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/",
+																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#include \"hal_delay.h\"\r\n\r\n#include <string.h>\r\n#include <stdio.h>\r\nstatic const hal_delay_interface_t *hal_delay = NULL;\r\n#endif\r\n/****************** ui main↑ ******************/",
 																			"code_c": "",
 																			"inc_py": "",
 																			"code_py": ""
