@@ -21,11 +21,65 @@
 #include "driver_log.h"
 #endif
 /****************** ui main↑ ******************/
-/****************** ui comm uart↓ ******************/
 #if GUI_SIMULATOR != 1
 #include "driver_cmd.h"
+#include <string.h>
+
+// 静态变量：定时器
+static lv_timer_t *uart_scan_timer = NULL;
+static uint8_t current_uart_ch = 0;      // 当前选择的串口通道
+
+// 定时器回调：扫描串口接收缓冲区
+static void uart_scan_timer_cb(lv_timer_t *timer) {
+    lv_ui *ui = (lv_ui *)timer->user_data;
+
+    // 获取 CMD 接口（使用 LOG 串口）
+    const driver_cmd_interface_t *cmd = driver_cmd_get_interface();
+    if (!cmd || !cmd->msg)
+        return;
+
+    // 扫描所有缓冲区，查找新数据
+    for (uint8_t i = 0; i < CMD_RX_BUFFER_COUNT; i++) {
+        cmd_msg_t *msg = &(cmd->msg[i]);
+
+        // 检查是否有新数据（rx_flag 置位）
+        if (msg->rx_flag && msg->length > 0) {
+            // 确保数据有结束符
+            if (msg->data[msg->length] != '\0') {
+                msg->data[msg->length] = '\0';
+            }
+
+            // 获取当前文本区内容
+            const char *current_text = lv_textarea_get_text(ui->ui_comm_uart_ta_rx_buf);
+            size_t current_len = strlen(current_text);
+            size_t new_data_len = msg->length;
+
+            // 计算总长度（限制在 512 字节内）
+            size_t total_len = current_len + new_data_len + 2; // +2 for "\r\n"
+
+            if (total_len > 512) {
+                // 删除前一半内容，保留后一半
+                size_t half_len = current_len / 2;
+                const char *second_half = current_text + half_len;
+
+                // 创建临时缓冲区存储后一半 + 新数据
+                char temp_buf[512];
+                snprintf(temp_buf, sizeof(temp_buf), "%s\r\n%s", second_half, (char *)msg->data);
+
+                // 设置为新内容
+                lv_textarea_set_text(ui->ui_comm_uart_ta_rx_buf, temp_buf);
+            } else {
+                // 追加新数据
+                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, (char *)msg->data);
+                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, "\r\n");
+            }
+
+            // 清除 rx_flag，标记已处理
+            msg->rx_flag = 0;
+        }
+    }
+}
 #endif
-/****************** ui comm uart↑ ******************/
 #include <stdlib.h>
 #include <time.h>
 
@@ -55,7 +109,7 @@ static void rc_timer_callback(lv_timer_t *timer)
     }
 }
 /****************** ui led↓ ******************/
-static uint32_t ui_led_slider_period_val = 0;
+static unsigned int ui_led_slider_period_val = 0;
 static bool ui_led_cb_blink_checked = 0;
 static bool ui_led_cb_sta_checked = 0;
 #if GUI_SIMULATOR != 1
@@ -330,6 +384,7 @@ static void ui_comm_can_ddlist_ch_event_handler (lv_event_t *e)
     {
         uint16_t id = lv_dropdown_get_selected(guider_ui.ui_comm_can_ddlist_ch);
         // 发送通道
+        LV_UNUSED(id);
         break;
     }
     default:
@@ -345,6 +400,7 @@ static void ui_comm_can_ddlist_rate_event_handler (lv_event_t *e)
     {
         uint16_t id = lv_dropdown_get_selected(guider_ui.ui_comm_can_ddlist_rate);
         // 发送波特率修改
+        LV_UNUSED(id);
         break;
     }
     default:
@@ -360,6 +416,7 @@ static void ui_comm_can_ddlist_rtr_event_handler (lv_event_t *e)
     {
         uint16_t id = lv_dropdown_get_selected(guider_ui.ui_comm_can_ddlist_rtr);
         // 数据/遥控帧
+        LV_UNUSED(id);
         break;
     }
     default:
@@ -375,6 +432,7 @@ static void ui_comm_can_ddlist_ide_event_handler (lv_event_t *e)
     {
         uint16_t id = lv_dropdown_get_selected(guider_ui.ui_comm_can_ddlist_ide);
         // ID模式
+        LV_UNUSED(id);
         break;
     }
     default:
@@ -490,6 +548,18 @@ static void ui_comm_uart_event_handler (lv_event_t *e)
 
         break;
     }
+    case LV_EVENT_SCREEN_UNLOADED:
+    {
+#if GUI_SIMULATOR != 1
+        // 删除定时器
+        if (uart_scan_timer) {
+            lv_timer_del(uart_scan_timer);
+            uart_scan_timer = NULL;
+        }
+#endif
+
+        break;
+    }
     default:
         break;
     }
@@ -502,7 +572,7 @@ static void ui_comm_uart_ddlist_ch_event_handler (lv_event_t *e)
     case LV_EVENT_VALUE_CHANGED:
     {
         uint16_t id = lv_dropdown_get_selected(guider_ui.ui_comm_uart_ddlist_ch);
-
+        LV_UNUSED(id);
         break;
     }
     default:
@@ -518,6 +588,40 @@ static void ui_comm_uart_sw_uart_event_handler (lv_event_t *e)
     {
         lv_obj_t * status_obj = lv_event_get_target(e);
         int status = lv_obj_has_state(status_obj, LV_STATE_CHECKED) ? true : false;
+#if GUI_SIMULATOR != 1
+        if (status) {
+            // === 打开串口监听 ===
+
+            // 1. 获取当前选择的串口通道（从下拉列表）
+            current_uart_ch = lv_dropdown_get_selected(guider_ui.ui_comm_uart_ddlist_ch);
+
+            // 2. 清空接收文本框
+            lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, "");
+
+            // 3. 创建定时器（每 100ms 扫描一次）
+            if (!uart_scan_timer) {
+                uart_scan_timer = lv_timer_create(uart_scan_timer_cb, 100, &guider_ui);
+            }
+
+            LV_LOG_USER("UART monitor started on channel %d", current_uart_ch);
+
+        } else {
+            // === 关闭串口监听 ===
+
+            // 1. 删除定时器
+            if (uart_scan_timer) {
+                lv_timer_del(uart_scan_timer);
+                uart_scan_timer = NULL;
+            }
+
+            LV_LOG_USER("UART monitor stopped");
+        }
+#else
+        // 仿真器模式：仅显示状态
+        if (status) {
+            lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, "Simulator Mode\r\nNo real UART data");
+        }
+#endif
         break;
     }
     default:
@@ -545,7 +649,7 @@ static void ui_comm_uart_btn_rx_clean_event_handler (lv_event_t *e)
     switch (code) {
     case LV_EVENT_RELEASED:
     {
-        lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_msg, "");
+        lv_textarea_set_text(guider_ui.ui_comm_uart_ta_rx_buf, "");
         break;
     }
     default:

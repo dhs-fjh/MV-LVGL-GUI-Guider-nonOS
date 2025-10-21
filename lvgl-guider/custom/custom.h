@@ -15,7 +15,7 @@ extern "C" {
 
 #include "gui_guider.h"
 
-#define GUI_SIMULATOR 1 // 仿真器
+#define GUI_SIMULATOR 0 // 仿真器
 
 void custom_init(lv_ui *ui);
 

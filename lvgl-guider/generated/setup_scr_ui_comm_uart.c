@@ -26,45 +26,45 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
     //Write style for ui_comm_uart, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_bg_opa(ui->ui_comm_uart, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-    //Write codes ui_comm_uart_ta_rx_msg
-    ui->ui_comm_uart_ta_rx_msg = lv_textarea_create(ui->ui_comm_uart);
-    lv_textarea_set_text(ui->ui_comm_uart_ta_rx_msg, "");
-    lv_textarea_set_placeholder_text(ui->ui_comm_uart_ta_rx_msg, "rx buf");
-    lv_textarea_set_password_bullet(ui->ui_comm_uart_ta_rx_msg, "*");
-    lv_textarea_set_password_mode(ui->ui_comm_uart_ta_rx_msg, false);
-    lv_textarea_set_one_line(ui->ui_comm_uart_ta_rx_msg, false);
-    lv_textarea_set_accepted_chars(ui->ui_comm_uart_ta_rx_msg, "");
-    lv_textarea_set_max_length(ui->ui_comm_uart_ta_rx_msg, 32);
+    //Write codes ui_comm_uart_ta_rx_buf
+    ui->ui_comm_uart_ta_rx_buf = lv_textarea_create(ui->ui_comm_uart);
+    lv_textarea_set_text(ui->ui_comm_uart_ta_rx_buf, "");
+    lv_textarea_set_placeholder_text(ui->ui_comm_uart_ta_rx_buf, "rx buf");
+    lv_textarea_set_password_bullet(ui->ui_comm_uart_ta_rx_buf, "*");
+    lv_textarea_set_password_mode(ui->ui_comm_uart_ta_rx_buf, false);
+    lv_textarea_set_one_line(ui->ui_comm_uart_ta_rx_buf, false);
+    lv_textarea_set_accepted_chars(ui->ui_comm_uart_ta_rx_buf, "");
+    lv_textarea_set_max_length(ui->ui_comm_uart_ta_rx_buf, 32);
 #if LV_USE_KEYBOARD != 0 || LV_USE_ZH_KEYBOARD != 0
-    lv_obj_add_event_cb(ui->ui_comm_uart_ta_rx_msg, ta_event_cb, LV_EVENT_ALL, ui->g_kb_top_layer);
+    lv_obj_add_event_cb(ui->ui_comm_uart_ta_rx_buf, ta_event_cb, LV_EVENT_ALL, ui->g_kb_top_layer);
 #endif
-    lv_obj_set_pos(ui->ui_comm_uart_ta_rx_msg, 5, 145);
-    lv_obj_set_size(ui->ui_comm_uart_ta_rx_msg, 310, 90);
+    lv_obj_set_pos(ui->ui_comm_uart_ta_rx_buf, 5, 145);
+    lv_obj_set_size(ui->ui_comm_uart_ta_rx_buf, 310, 90);
 
-    //Write style for ui_comm_uart_ta_rx_msg, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-    lv_obj_set_style_text_color(ui->ui_comm_uart_ta_rx_msg, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_uart_ta_rx_msg, &lv_font_montserratMedium_12, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui->ui_comm_uart_ta_rx_msg, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_letter_space(ui->ui_comm_uart_ta_rx_msg, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_align(ui->ui_comm_uart_ta_rx_msg, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui->ui_comm_uart_ta_rx_msg, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui->ui_comm_uart_ta_rx_msg, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_grad_dir(ui->ui_comm_uart_ta_rx_msg, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_border_width(ui->ui_comm_uart_ta_rx_msg, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_border_opa(ui->ui_comm_uart_ta_rx_msg, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_border_color(ui->ui_comm_uart_ta_rx_msg, lv_color_hex(0xe6e6e6), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_border_side(ui->ui_comm_uart_ta_rx_msg, LV_BORDER_SIDE_FULL, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_shadow_width(ui->ui_comm_uart_ta_rx_msg, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_top(ui->ui_comm_uart_ta_rx_msg, 4, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_right(ui->ui_comm_uart_ta_rx_msg, 4, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_left(ui->ui_comm_uart_ta_rx_msg, 4, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_radius(ui->ui_comm_uart_ta_rx_msg, 4, LV_PART_MAIN|LV_STATE_DEFAULT);
+    //Write style for ui_comm_uart_ta_rx_buf, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+    lv_obj_set_style_text_color(ui->ui_comm_uart_ta_rx_buf, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_uart_ta_rx_buf, &lv_font_montserratMedium_12, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui->ui_comm_uart_ta_rx_buf, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_letter_space(ui->ui_comm_uart_ta_rx_buf, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui->ui_comm_uart_ta_rx_buf, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->ui_comm_uart_ta_rx_buf, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->ui_comm_uart_ta_rx_buf, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_grad_dir(ui->ui_comm_uart_ta_rx_buf, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui->ui_comm_uart_ta_rx_buf, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui->ui_comm_uart_ta_rx_buf, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui->ui_comm_uart_ta_rx_buf, lv_color_hex(0xe6e6e6), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_border_side(ui->ui_comm_uart_ta_rx_buf, LV_BORDER_SIDE_FULL, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(ui->ui_comm_uart_ta_rx_buf, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_top(ui->ui_comm_uart_ta_rx_buf, 4, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_right(ui->ui_comm_uart_ta_rx_buf, 4, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_left(ui->ui_comm_uart_ta_rx_buf, 4, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->ui_comm_uart_ta_rx_buf, 4, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-    //Write style for ui_comm_uart_ta_rx_msg, Part: LV_PART_SCROLLBAR, State: LV_STATE_DEFAULT.
-    lv_obj_set_style_bg_opa(ui->ui_comm_uart_ta_rx_msg, 255, LV_PART_SCROLLBAR|LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui->ui_comm_uart_ta_rx_msg, lv_color_hex(0x2195f6), LV_PART_SCROLLBAR|LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_grad_dir(ui->ui_comm_uart_ta_rx_msg, LV_GRAD_DIR_NONE, LV_PART_SCROLLBAR|LV_STATE_DEFAULT);
-    lv_obj_set_style_radius(ui->ui_comm_uart_ta_rx_msg, 0, LV_PART_SCROLLBAR|LV_STATE_DEFAULT);
+    //Write style for ui_comm_uart_ta_rx_buf, Part: LV_PART_SCROLLBAR, State: LV_STATE_DEFAULT.
+    lv_obj_set_style_bg_opa(ui->ui_comm_uart_ta_rx_buf, 255, LV_PART_SCROLLBAR|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->ui_comm_uart_ta_rx_buf, lv_color_hex(0x2195f6), LV_PART_SCROLLBAR|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_grad_dir(ui->ui_comm_uart_ta_rx_buf, LV_GRAD_DIR_NONE, LV_PART_SCROLLBAR|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->ui_comm_uart_ta_rx_buf, 0, LV_PART_SCROLLBAR|LV_STATE_DEFAULT);
 
     //Write codes ui_comm_uart_ddlist_rx_fmt
     ui->ui_comm_uart_ddlist_rx_fmt = lv_dropdown_create(ui->ui_comm_uart);
@@ -710,7 +710,6 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
     lv_obj_set_style_text_align(ui->ui_comm_uart_btn_back, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
 
     //The custom code of ui_comm_uart.
-    lv_obj_clear_state(guider_ui.ui_comm_uart_ta_rx_msg, LV_STATE_EDITED); // 关键：禁用编辑状态
 
 
     //Update current screen layout.
