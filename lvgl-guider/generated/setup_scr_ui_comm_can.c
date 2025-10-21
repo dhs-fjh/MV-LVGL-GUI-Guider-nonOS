@@ -28,8 +28,8 @@ void setup_scr_ui_comm_can(lv_ui *ui)
 
     //Write codes ui_comm_can_ta_rx_msg
     ui->ui_comm_can_ta_rx_msg = lv_textarea_create(ui->ui_comm_can);
-    lv_textarea_set_text(ui->ui_comm_can_ta_rx_msg, "Hello World");
-    lv_textarea_set_placeholder_text(ui->ui_comm_can_ta_rx_msg, "");
+    lv_textarea_set_text(ui->ui_comm_can_ta_rx_msg, "");
+    lv_textarea_set_placeholder_text(ui->ui_comm_can_ta_rx_msg, "rx buf");
     lv_textarea_set_password_bullet(ui->ui_comm_can_ta_rx_msg, "*");
     lv_textarea_set_password_mode(ui->ui_comm_can_ta_rx_msg, false);
     lv_textarea_set_one_line(ui->ui_comm_can_ta_rx_msg, false);
@@ -391,8 +391,8 @@ void setup_scr_ui_comm_can(lv_ui *ui)
 
     //Write codes ui_comm_can_ta_tx_buf
     ui->ui_comm_can_ta_tx_buf = lv_textarea_create(ui->ui_comm_can);
-    lv_textarea_set_text(ui->ui_comm_can_ta_tx_buf, "AA BB CC DD EE FF AA BB CC");
-    lv_textarea_set_placeholder_text(ui->ui_comm_can_ta_tx_buf, "");
+    lv_textarea_set_text(ui->ui_comm_can_ta_tx_buf, "");
+    lv_textarea_set_placeholder_text(ui->ui_comm_can_ta_tx_buf, "tx buf");
     lv_textarea_set_password_bullet(ui->ui_comm_can_ta_tx_buf, "*");
     lv_textarea_set_password_mode(ui->ui_comm_can_ta_tx_buf, false);
     lv_textarea_set_one_line(ui->ui_comm_can_ta_tx_buf, true);

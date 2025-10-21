@@ -21,8 +21,6 @@
 #include "driver_log.h"
 #endif
 /****************** ui main↑ ******************/
-
-static uint32_t *ui_comm_can_rx_msg_buf;    // 申请的内存的地址指向
 /****************** ui comm uart↓ ******************/
 #if GUI_SIMULATOR != 1
 #include "driver_cmd.h"
