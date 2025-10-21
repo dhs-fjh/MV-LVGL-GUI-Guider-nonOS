@@ -43,7 +43,7 @@ void setup_scr_ui_comm_can(lv_ui *ui)
 
     //Write style for ui_comm_can_ta_rx_msg, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_can_ta_rx_msg, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_can_ta_rx_msg, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_can_ta_rx_msg, &lv_font_montserratMedium_12, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_can_ta_rx_msg, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_letter_space(ui->ui_comm_can_ta_rx_msg, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui->ui_comm_can_ta_rx_msg, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -74,7 +74,7 @@ void setup_scr_ui_comm_can(lv_ui *ui)
 
     //Write style for ui_comm_can_ddlist_ch, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_can_ddlist_ch, lv_color_hex(0x0D3055), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_can_ddlist_ch, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_can_ddlist_ch, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_can_ddlist_ch, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui->ui_comm_can_ddlist_ch, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui->ui_comm_can_ddlist_ch, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -139,7 +139,7 @@ void setup_scr_ui_comm_can(lv_ui *ui)
 
     //Write style for ui_comm_can_ddlist_rate, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_can_ddlist_rate, lv_color_hex(0x0D3055), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_can_ddlist_rate, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_can_ddlist_rate, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_can_ddlist_rate, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui->ui_comm_can_ddlist_rate, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui->ui_comm_can_ddlist_rate, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -204,7 +204,7 @@ void setup_scr_ui_comm_can(lv_ui *ui)
 
     //Write style for ui_comm_can_ddlist_rtr, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_can_ddlist_rtr, lv_color_hex(0x0D3055), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_can_ddlist_rtr, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_can_ddlist_rtr, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_can_ddlist_rtr, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui->ui_comm_can_ddlist_rtr, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui->ui_comm_can_ddlist_rtr, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -269,7 +269,7 @@ void setup_scr_ui_comm_can(lv_ui *ui)
 
     //Write style for ui_comm_can_ddlist_ide, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_can_ddlist_ide, lv_color_hex(0x0D3055), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_can_ddlist_ide, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_can_ddlist_ide, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_can_ddlist_ide, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui->ui_comm_can_ddlist_ide, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui->ui_comm_can_ddlist_ide, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -343,7 +343,7 @@ void setup_scr_ui_comm_can(lv_ui *ui)
 
     //Write style for ui_comm_can_ta_can_id, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_can_ta_can_id, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_can_ta_can_id, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_can_ta_can_id, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_can_ta_can_id, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_letter_space(ui->ui_comm_can_ta_can_id, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui->ui_comm_can_ta_can_id, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -395,7 +395,7 @@ void setup_scr_ui_comm_can(lv_ui *ui)
     lv_textarea_set_placeholder_text(ui->ui_comm_can_ta_tx_buf, "");
     lv_textarea_set_password_bullet(ui->ui_comm_can_ta_tx_buf, "*");
     lv_textarea_set_password_mode(ui->ui_comm_can_ta_tx_buf, false);
-    lv_textarea_set_one_line(ui->ui_comm_can_ta_tx_buf, false);
+    lv_textarea_set_one_line(ui->ui_comm_can_ta_tx_buf, true);
     lv_textarea_set_accepted_chars(ui->ui_comm_can_ta_tx_buf, "");
     lv_textarea_set_max_length(ui->ui_comm_can_ta_tx_buf, 32);
 #if LV_USE_KEYBOARD != 0 || LV_USE_ZH_KEYBOARD != 0
@@ -406,7 +406,7 @@ void setup_scr_ui_comm_can(lv_ui *ui)
 
     //Write style for ui_comm_can_ta_tx_buf, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_can_ta_tx_buf, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_can_ta_tx_buf, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_can_ta_tx_buf, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_can_ta_tx_buf, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_letter_space(ui->ui_comm_can_ta_tx_buf, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui->ui_comm_can_ta_tx_buf, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);

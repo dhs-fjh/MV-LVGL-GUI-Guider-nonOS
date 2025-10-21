@@ -28,13 +28,13 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
 
     //Write codes ui_comm_uart_ta_rx_msg
     ui->ui_comm_uart_ta_rx_msg = lv_textarea_create(ui->ui_comm_uart);
-    lv_textarea_set_text(ui->ui_comm_uart_ta_rx_msg, "Hello World");
+    lv_textarea_set_text(ui->ui_comm_uart_ta_rx_msg, "RX BUF");
     lv_textarea_set_placeholder_text(ui->ui_comm_uart_ta_rx_msg, "");
     lv_textarea_set_password_bullet(ui->ui_comm_uart_ta_rx_msg, "*");
     lv_textarea_set_password_mode(ui->ui_comm_uart_ta_rx_msg, false);
     lv_textarea_set_one_line(ui->ui_comm_uart_ta_rx_msg, false);
     lv_textarea_set_accepted_chars(ui->ui_comm_uart_ta_rx_msg, "");
-    lv_textarea_set_max_length(ui->ui_comm_uart_ta_rx_msg, 512);
+    lv_textarea_set_max_length(ui->ui_comm_uart_ta_rx_msg, 32);
 #if LV_USE_KEYBOARD != 0 || LV_USE_ZH_KEYBOARD != 0
     lv_obj_add_event_cb(ui->ui_comm_uart_ta_rx_msg, ta_event_cb, LV_EVENT_ALL, ui->g_kb_top_layer);
 #endif
@@ -43,7 +43,7 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
 
     //Write style for ui_comm_uart_ta_rx_msg, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_uart_ta_rx_msg, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_uart_ta_rx_msg, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_uart_ta_rx_msg, &lv_font_montserratMedium_12, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_uart_ta_rx_msg, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_letter_space(ui->ui_comm_uart_ta_rx_msg, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui->ui_comm_uart_ta_rx_msg, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -74,7 +74,7 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
 
     //Write style for ui_comm_uart_ddlist_rx_fmt, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_uart_ddlist_rx_fmt, lv_color_hex(0x0D3055), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_uart_ddlist_rx_fmt, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_uart_ddlist_rx_fmt, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_uart_ddlist_rx_fmt, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui->ui_comm_uart_ddlist_rx_fmt, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui->ui_comm_uart_ddlist_rx_fmt, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -139,7 +139,7 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
 
     //Write style for ui_comm_uart_ddlist_check, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_uart_ddlist_check, lv_color_hex(0x0D3055), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_uart_ddlist_check, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_uart_ddlist_check, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_uart_ddlist_check, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui->ui_comm_uart_ddlist_check, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui->ui_comm_uart_ddlist_check, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -204,7 +204,7 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
 
     //Write style for ui_comm_uart_ddlist_data_bit, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_uart_ddlist_data_bit, lv_color_hex(0x0D3055), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_uart_ddlist_data_bit, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_uart_ddlist_data_bit, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_uart_ddlist_data_bit, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui->ui_comm_uart_ddlist_data_bit, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui->ui_comm_uart_ddlist_data_bit, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -269,7 +269,7 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
 
     //Write style for ui_comm_uart_ddlist_stop, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_uart_ddlist_stop, lv_color_hex(0x0D3055), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_uart_ddlist_stop, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_uart_ddlist_stop, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_uart_ddlist_stop, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui->ui_comm_uart_ddlist_stop, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui->ui_comm_uart_ddlist_stop, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -366,7 +366,7 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
 
     //Write style for ui_comm_uart_ddlist_tx_fmt, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_uart_ddlist_tx_fmt, lv_color_hex(0x0D3055), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_uart_ddlist_tx_fmt, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_uart_ddlist_tx_fmt, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_uart_ddlist_tx_fmt, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui->ui_comm_uart_ddlist_tx_fmt, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui->ui_comm_uart_ddlist_tx_fmt, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -431,7 +431,7 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
 
     //Write style for ui_comm_uart_ddlist_ch, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_uart_ddlist_ch, lv_color_hex(0x0D3055), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_uart_ddlist_ch, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_uart_ddlist_ch, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_uart_ddlist_ch, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui->ui_comm_uart_ddlist_ch, 1, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui->ui_comm_uart_ddlist_ch, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -505,7 +505,7 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
 
     //Write style for ui_comm_uart_ta_rate, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_uart_ta_rate, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_uart_ta_rate, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_uart_ta_rate, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_uart_ta_rate, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_letter_space(ui->ui_comm_uart_ta_rate, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui->ui_comm_uart_ta_rate, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -556,11 +556,11 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
 
     //Write codes ui_comm_uart_ta_tx_buf
     ui->ui_comm_uart_ta_tx_buf = lv_textarea_create(ui->ui_comm_uart);
-    lv_textarea_set_text(ui->ui_comm_uart_ta_tx_buf, "AA BB CC DD EE FF AA BB CC");
+    lv_textarea_set_text(ui->ui_comm_uart_ta_tx_buf, "");
     lv_textarea_set_placeholder_text(ui->ui_comm_uart_ta_tx_buf, "");
     lv_textarea_set_password_bullet(ui->ui_comm_uart_ta_tx_buf, "*");
     lv_textarea_set_password_mode(ui->ui_comm_uart_ta_tx_buf, false);
-    lv_textarea_set_one_line(ui->ui_comm_uart_ta_tx_buf, false);
+    lv_textarea_set_one_line(ui->ui_comm_uart_ta_tx_buf, true);
     lv_textarea_set_accepted_chars(ui->ui_comm_uart_ta_tx_buf, "");
     lv_textarea_set_max_length(ui->ui_comm_uart_ta_tx_buf, 32);
 #if LV_USE_KEYBOARD != 0 || LV_USE_ZH_KEYBOARD != 0
@@ -571,7 +571,7 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
 
     //Write style for ui_comm_uart_ta_tx_buf, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->ui_comm_uart_ta_tx_buf, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui->ui_comm_uart_ta_tx_buf, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->ui_comm_uart_ta_tx_buf, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui->ui_comm_uart_ta_tx_buf, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_letter_space(ui->ui_comm_uart_ta_tx_buf, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui->ui_comm_uart_ta_tx_buf, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN|LV_STATE_DEFAULT);

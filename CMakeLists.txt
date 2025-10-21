@@ -53,6 +53,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     # drivers
     src/drivers/comm/driver_log.c
+    src/drivers/comm/driver_cmd.c
 
     src/drivers/device/driver_led.c
 

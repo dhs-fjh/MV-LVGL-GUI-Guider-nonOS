@@ -196,6 +196,8 @@ void setup_scr_ui_io(lv_ui *ui);
 void setup_scr_ui_led(lv_ui *ui);
 
 LV_FONT_DECLARE(lv_font_montserratMedium_16)
+LV_FONT_DECLARE(lv_font_montserratMedium_12)
+LV_FONT_DECLARE(lv_font_montserratMedium_14)
 LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_18)
 
 

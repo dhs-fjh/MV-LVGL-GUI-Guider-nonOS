@@ -4684,7 +4684,7 @@
 					"default_style": false,
 					"text": "AA BB CC DD EE FF AA BB CC",
 					"password_mode": false,
-					"one_line_mode": false,
+					"one_line_mode": true,
 					"placeholder": "",
 					"accept_characters": "",
 					"max_len": 32,
@@ -4694,7 +4694,7 @@
 							"part": "LV_PART_MAIN",
 							"state": "LV_STATE_DEFAULT",
 							"disable": false,
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"bg_color": "#ffffff",
 							"bg_grad_color": "#ffffff",
@@ -4905,7 +4905,7 @@
 							"part": "LV_PART_MAIN",
 							"state": "LV_STATE_DEFAULT",
 							"disable": false,
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"bg_color": "#ffffff",
 							"bg_grad_color": "#ffffff",
@@ -5038,7 +5038,7 @@
 							"bg_main_stop": 0,
 							"bg_grad_stop": 255,
 							"text_color": "#0D3055",
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"border_color": "#e1e6ee",
 							"border_side": [
@@ -5286,7 +5286,7 @@
 							"bg_main_stop": 0,
 							"bg_grad_stop": 255,
 							"text_color": "#0D3055",
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"border_color": "#e1e6ee",
 							"border_side": [
@@ -5564,7 +5564,7 @@
 							"bg_main_stop": 0,
 							"bg_grad_stop": 255,
 							"text_color": "#0D3055",
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"border_color": "#e1e6ee",
 							"border_side": [
@@ -5872,7 +5872,7 @@
 							"bg_main_stop": 0,
 							"bg_grad_stop": 255,
 							"text_color": "#0D3055",
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"border_color": "#e1e6ee",
 							"border_side": [
@@ -6093,7 +6093,7 @@
 					"left": 5,
 					"top": 110,
 					"visible": true,
-					"isLock": false,
+					"isLock": true,
 					"flag": [],
 					"width": 310,
 					"height": 125,
@@ -6110,7 +6110,7 @@
 							"part": "LV_PART_MAIN",
 							"state": "LV_STATE_DEFAULT",
 							"disable": false,
-							"font": 16,
+							"font": 12,
 							"font_family": "montserratMedium",
 							"bg_color": "#ffffff",
 							"bg_grad_color": "#ffffff",
@@ -6665,7 +6665,7 @@
 								"condition": [],
 								"action": [
 									{
-										"dst": "zradmt8y",
+										"dst": "rz83lfc7",
 										"bindCondi": "",
 										"actionList": {
 											"text": {
@@ -7179,9 +7179,9 @@
 					"width": 310,
 					"height": 30,
 					"default_style": false,
-					"text": "AA BB CC DD EE FF AA BB CC",
+					"text": "",
 					"password_mode": false,
-					"one_line_mode": false,
+					"one_line_mode": true,
 					"placeholder": "",
 					"accept_characters": "",
 					"max_len": 32,
@@ -7191,7 +7191,7 @@
 							"part": "LV_PART_MAIN",
 							"state": "LV_STATE_DEFAULT",
 							"disable": false,
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"bg_color": "#ffffff",
 							"bg_grad_color": "#ffffff",
@@ -7563,7 +7563,7 @@
 							"part": "LV_PART_MAIN",
 							"state": "LV_STATE_DEFAULT",
 							"disable": false,
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"bg_color": "#ffffff",
 							"bg_grad_color": "#ffffff",
@@ -7681,7 +7681,7 @@
 							"bg_main_stop": 0,
 							"bg_grad_stop": 255,
 							"text_color": "#0D3055",
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"border_color": "#e1e6ee",
 							"border_side": [
@@ -7953,7 +7953,7 @@
 							"bg_main_stop": 0,
 							"bg_grad_stop": 255,
 							"text_color": "#0D3055",
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"border_color": "#e1e6ee",
 							"border_side": [
@@ -8395,7 +8395,7 @@
 							"bg_main_stop": 0,
 							"bg_grad_stop": 255,
 							"text_color": "#0D3055",
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"border_color": "#e1e6ee",
 							"border_side": [
@@ -8610,7 +8610,7 @@
 							"bg_main_stop": 0,
 							"bg_grad_stop": 255,
 							"text_color": "#0D3055",
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"border_color": "#e1e6ee",
 							"border_side": [
@@ -8819,7 +8819,7 @@
 							"bg_main_stop": 0,
 							"bg_grad_stop": 255,
 							"text_color": "#0D3055",
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"border_color": "#e1e6ee",
 							"border_side": [
@@ -9025,7 +9025,7 @@
 							"bg_main_stop": 0,
 							"bg_grad_stop": 255,
 							"text_color": "#0D3055",
-							"font": 16,
+							"font": 14,
 							"font_family": "montserratMedium",
 							"border_color": "#e1e6ee",
 							"border_side": [
@@ -9199,7 +9199,7 @@
 				},
 				{
 					"name": "ta_rx_msg",
-					"id": "zradmt8y",
+					"id": "rz83lfc7",
 					"type": "ta",
 					"left": 5,
 					"top": 145,
@@ -9209,19 +9209,19 @@
 					"width": 310,
 					"height": 90,
 					"default_style": false,
-					"text": "Hello World",
+					"text": "RX BUF",
 					"password_mode": false,
 					"one_line_mode": false,
 					"placeholder": "",
 					"accept_characters": "",
-					"max_len": 512,
+					"max_len": 32,
 					"password_bullet": "*",
 					"style": [
 						{
 							"part": "LV_PART_MAIN",
 							"state": "LV_STATE_DEFAULT",
 							"disable": false,
-							"font": 16,
+							"font": 12,
 							"font_family": "montserratMedium",
 							"bg_color": "#ffffff",
 							"bg_grad_color": "#ffffff",
@@ -9301,7 +9301,27 @@
 					"layerName": "ui_comm_uart"
 				}
 			],
-			"event": {},
+			"event": {
+				"widget": {
+					"screen_load_start": {
+						"condition": [],
+						"action": [
+							{
+								"dst": "custom_code",
+								"bindCondi": "",
+								"actionList": {
+									"custom_code": {
+										"inc_c": "/****************** ui comm uart↓ ******************/\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_cmd.h\"\r\n#endif\r\n/****************** ui comm uart↑ ******************/",
+										"code_c": "",
+										"inc_py": "",
+										"code_py": ""
+									}
+								}
+							}
+						]
+					}
+				}
+			},
 			"style": [
 				{
 					"part": "LV_PART_MAIN",
@@ -13319,7 +13339,7 @@
 										"actionList": {
 											"custom_code": {
 												"inc_c": "",
-												"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    led->enable_auto_blink(status);\r\n#endif\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
+												"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    led->enable_auto_blink(status);\r\n    log_debug(\"LED auto blink: %d\", status);\r\n#endif\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
 												"inc_py": "",
 												"code_py": ""
 											}
@@ -13595,7 +13615,7 @@
 										"actionList": {
 											"custom_code": {
 												"inc_c": "",
-												"code_c": "if(status) {\r\n    ui_led_cb_sta_checked = 1;\r\n} else {\r\n    ui_led_cb_sta_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    if(status)\r\n        led->on();\r\n    else\r\n        led->off();\r\n#endif\r\nLV_LOG_USER(\"LED status: %d\", ui_led_cb_sta_checked);",
+												"code_c": "if(status) {\r\n    ui_led_cb_sta_checked = 1;\r\n} else {\r\n    ui_led_cb_sta_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    if(status)\r\n        led->on();\r\n    else\r\n        led->off();\r\n    log_debug(\"LED status: %d\", status);\r\n#endif\r\nLV_LOG_USER(\"LED status: %d\", ui_led_cb_sta_checked);",
 												"inc_py": "",
 												"code_py": ""
 											}
@@ -14003,7 +14023,7 @@
 										"actionList": {
 											"custom_code": {
 												"inc_c": "",
-												"code_c": "lv_obj_t *slider = lv_event_get_target(e);\r\nui_led_slider_period_val = lv_slider_get_value(slider);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\nLV_LOG_USER(\"LED blink period: %d\", ui_led_slider_period_val);\r\n#if GUI_SIMULATOR != 1\r\n    led->set_blink_period(ui_led_slider_period_val)\r\n    log_info(\"LED blink period: %d\", ui_led_slider_period_val)\r\n#endif",
+												"code_c": "lv_obj_t *slider = lv_event_get_target(e);\r\nui_led_slider_period_val = lv_slider_get_value(slider);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\nLV_LOG_USER(\"LED blink period: %d\", ui_led_slider_period_val);\r\n#if GUI_SIMULATOR != 1\r\n    led->set_blink_period(ui_led_slider_period_val);\r\n    log_debug(\"LED blink period: %d\", ui_led_slider_period_val);\r\n#endif",
 												"inc_py": "",
 												"code_py": ""
 											}
@@ -16403,7 +16423,7 @@
 																			"actionList": {
 																				"custom_code": {
 																					"inc_c": "",
-																					"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    led->enable_auto_blink(status);\r\n#endif\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
+																					"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    led->enable_auto_blink(status);\r\n    log_debug(\"LED auto blink: %d\", status);\r\n#endif\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
 																					"inc_py": "",
 																					"code_py": ""
 																				}
@@ -16679,7 +16699,7 @@
 																			"actionList": {
 																				"custom_code": {
 																					"inc_c": "",
-																					"code_c": "if(status) {\r\n    ui_led_cb_sta_checked = 1;\r\n} else {\r\n    ui_led_cb_sta_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    if(status)\r\n        led->on();\r\n    else\r\n        led->off();\r\n#endif\r\nLV_LOG_USER(\"LED status: %d\", ui_led_cb_sta_checked);",
+																					"code_c": "if(status) {\r\n    ui_led_cb_sta_checked = 1;\r\n} else {\r\n    ui_led_cb_sta_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    if(status)\r\n        led->on();\r\n    else\r\n        led->off();\r\n    log_debug(\"LED status: %d\", status);\r\n#endif\r\nLV_LOG_USER(\"LED status: %d\", ui_led_cb_sta_checked);",
 																					"inc_py": "",
 																					"code_py": ""
 																				}
@@ -17087,7 +17107,7 @@
 																			"actionList": {
 																				"custom_code": {
 																					"inc_c": "",
-																					"code_c": "lv_obj_t *slider = lv_event_get_target(e);\r\nui_led_slider_period_val = lv_slider_get_value(slider);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\nLV_LOG_USER(\"LED blink period: %d\", ui_led_slider_period_val);\r\n#if GUI_SIMULATOR != 1\r\n    led->set_blink_period(ui_led_slider_period_val)\r\n    log_info(\"LED blink period: %d\", ui_led_slider_period_val)\r\n#endif",
+																					"code_c": "lv_obj_t *slider = lv_event_get_target(e);\r\nui_led_slider_period_val = lv_slider_get_value(slider);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\nLV_LOG_USER(\"LED blink period: %d\", ui_led_slider_period_val);\r\n#if GUI_SIMULATOR != 1\r\n    led->set_blink_period(ui_led_slider_period_val);\r\n    log_debug(\"LED blink period: %d\", ui_led_slider_period_val);\r\n#endif",
 																					"inc_py": "",
 																					"code_py": ""
 																				}
@@ -24448,7 +24468,7 @@
 														"default_style": false,
 														"text": "AA BB CC DD EE FF AA BB CC",
 														"password_mode": false,
-														"one_line_mode": false,
+														"one_line_mode": true,
 														"placeholder": "",
 														"accept_characters": "",
 														"max_len": 32,
@@ -24458,7 +24478,7 @@
 																"part": "LV_PART_MAIN",
 																"state": "LV_STATE_DEFAULT",
 																"disable": false,
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"bg_color": "#ffffff",
 																"bg_grad_color": "#ffffff",
@@ -24669,7 +24689,7 @@
 																"part": "LV_PART_MAIN",
 																"state": "LV_STATE_DEFAULT",
 																"disable": false,
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"bg_color": "#ffffff",
 																"bg_grad_color": "#ffffff",
@@ -24802,7 +24822,7 @@
 																"bg_main_stop": 0,
 																"bg_grad_stop": 255,
 																"text_color": "#0D3055",
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"border_color": "#e1e6ee",
 																"border_side": [
@@ -25050,7 +25070,7 @@
 																"bg_main_stop": 0,
 																"bg_grad_stop": 255,
 																"text_color": "#0D3055",
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"border_color": "#e1e6ee",
 																"border_side": [
@@ -25328,7 +25348,7 @@
 																"bg_main_stop": 0,
 																"bg_grad_stop": 255,
 																"text_color": "#0D3055",
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"border_color": "#e1e6ee",
 																"border_side": [
@@ -25636,7 +25656,7 @@
 																"bg_main_stop": 0,
 																"bg_grad_stop": 255,
 																"text_color": "#0D3055",
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"border_color": "#e1e6ee",
 																"border_side": [
@@ -25857,7 +25877,7 @@
 														"left": 5,
 														"top": 110,
 														"visible": true,
-														"isLock": false,
+														"isLock": true,
 														"flag": [],
 														"width": 310,
 														"height": 125,
@@ -25874,7 +25894,7 @@
 																"part": "LV_PART_MAIN",
 																"state": "LV_STATE_DEFAULT",
 																"disable": false,
-																"font": 16,
+																"font": 12,
 																"font_family": "montserratMedium",
 																"bg_color": "#ffffff",
 																"bg_grad_color": "#ffffff",
@@ -26451,7 +26471,7 @@
 																	"condition": [],
 																	"action": [
 																		{
-																			"dst": "zradmt8y",
+																			"dst": "rz83lfc7",
 																			"bindCondi": "",
 																			"actionList": {
 																				"text": {
@@ -26965,9 +26985,9 @@
 														"width": 310,
 														"height": 30,
 														"default_style": false,
-														"text": "AA BB CC DD EE FF AA BB CC",
+														"text": "",
 														"password_mode": false,
-														"one_line_mode": false,
+														"one_line_mode": true,
 														"placeholder": "",
 														"accept_characters": "",
 														"max_len": 32,
@@ -26977,7 +26997,7 @@
 																"part": "LV_PART_MAIN",
 																"state": "LV_STATE_DEFAULT",
 																"disable": false,
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"bg_color": "#ffffff",
 																"bg_grad_color": "#ffffff",
@@ -27349,7 +27369,7 @@
 																"part": "LV_PART_MAIN",
 																"state": "LV_STATE_DEFAULT",
 																"disable": false,
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"bg_color": "#ffffff",
 																"bg_grad_color": "#ffffff",
@@ -27467,7 +27487,7 @@
 																"bg_main_stop": 0,
 																"bg_grad_stop": 255,
 																"text_color": "#0D3055",
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"border_color": "#e1e6ee",
 																"border_side": [
@@ -27739,7 +27759,7 @@
 																"bg_main_stop": 0,
 																"bg_grad_stop": 255,
 																"text_color": "#0D3055",
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"border_color": "#e1e6ee",
 																"border_side": [
@@ -28181,7 +28201,7 @@
 																"bg_main_stop": 0,
 																"bg_grad_stop": 255,
 																"text_color": "#0D3055",
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"border_color": "#e1e6ee",
 																"border_side": [
@@ -28396,7 +28416,7 @@
 																"bg_main_stop": 0,
 																"bg_grad_stop": 255,
 																"text_color": "#0D3055",
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"border_color": "#e1e6ee",
 																"border_side": [
@@ -28605,7 +28625,7 @@
 																"bg_main_stop": 0,
 																"bg_grad_stop": 255,
 																"text_color": "#0D3055",
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"border_color": "#e1e6ee",
 																"border_side": [
@@ -28811,7 +28831,7 @@
 																"bg_main_stop": 0,
 																"bg_grad_stop": 255,
 																"text_color": "#0D3055",
-																"font": 16,
+																"font": 14,
 																"font_family": "montserratMedium",
 																"border_color": "#e1e6ee",
 																"border_side": [
@@ -28985,7 +29005,7 @@
 													},
 													{
 														"name": "ta_rx_msg",
-														"id": "zradmt8y",
+														"id": "rz83lfc7",
 														"type": "ta",
 														"left": 5,
 														"top": 145,
@@ -28995,19 +29015,19 @@
 														"width": 310,
 														"height": 90,
 														"default_style": false,
-														"text": "Hello World",
+														"text": "RX BUF",
 														"password_mode": false,
 														"one_line_mode": false,
 														"placeholder": "",
 														"accept_characters": "",
-														"max_len": 512,
+														"max_len": 32,
 														"password_bullet": "*",
 														"style": [
 															{
 																"part": "LV_PART_MAIN",
 																"state": "LV_STATE_DEFAULT",
 																"disable": false,
-																"font": 16,
+																"font": 12,
 																"font_family": "montserratMedium",
 																"bg_color": "#ffffff",
 																"bg_grad_color": "#ffffff",
@@ -29087,7 +29107,27 @@
 														"layerName": "ui_comm_uart"
 													}
 												],
-												"event": {},
+												"event": {
+													"widget": {
+														"screen_load_start": {
+															"condition": [],
+															"action": [
+																{
+																	"dst": "custom_code",
+																	"bindCondi": "",
+																	"actionList": {
+																		"custom_code": {
+																			"inc_c": "/****************** ui comm uart↓ ******************/\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_cmd.h\"\r\n#endif\r\n/****************** ui comm uart↑ ******************/",
+																			"code_c": "",
+																			"inc_py": "",
+																			"code_py": ""
+																		}
+																	}
+																}
+															]
+														}
+													}
+												},
 												"style": [
 													{
 														"part": "LV_PART_MAIN",
@@ -34168,7 +34208,7 @@
 								"part": "LV_PART_MAIN",
 								"state": "LV_STATE_DEFAULT",
 								"disable": false,
-								"font": 16,
+								"font": 12,
 								"font_family": "montserratMedium",
 								"bg_color": "#ffffff",
 								"bg_grad_color": "#ffffff",
@@ -34316,7 +34356,7 @@
 								"bg_main_stop": 0,
 								"bg_grad_stop": 255,
 								"text_color": "#0D3055",
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"border_color": "#e1e6ee",
 								"border_side": [
@@ -34620,7 +34660,7 @@
 								"bg_main_stop": 0,
 								"bg_grad_stop": 255,
 								"text_color": "#0D3055",
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"border_color": "#e1e6ee",
 								"border_side": [
@@ -34864,7 +34904,7 @@
 								"bg_main_stop": 0,
 								"bg_grad_stop": 255,
 								"text_color": "#0D3055",
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"border_color": "#e1e6ee",
 								"border_side": [
@@ -35108,7 +35148,7 @@
 								"bg_main_stop": 0,
 								"bg_grad_stop": 255,
 								"text_color": "#0D3055",
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"border_color": "#e1e6ee",
 								"border_side": [
@@ -35330,7 +35370,7 @@
 								"part": "LV_PART_MAIN",
 								"state": "LV_STATE_DEFAULT",
 								"disable": false,
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"bg_color": "#ffffff",
 								"bg_grad_color": "#ffffff",
@@ -35536,7 +35576,7 @@
 						},
 						"text": "AA BB CC DD EE FF AA BB CC",
 						"password_mode": false,
-						"one_line_mode": false,
+						"one_line_mode": true,
 						"placeholder": "",
 						"accept_characters": "",
 						"max_len": 32,
@@ -35546,7 +35586,7 @@
 								"part": "LV_PART_MAIN",
 								"state": "LV_STATE_DEFAULT",
 								"disable": false,
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"bg_color": "#ffffff",
 								"bg_grad_color": "#ffffff",
@@ -35876,7 +35916,7 @@
 												"default_style": false,
 												"text": "AA BB CC DD EE FF AA BB CC",
 												"password_mode": false,
-												"one_line_mode": false,
+												"one_line_mode": true,
 												"placeholder": "",
 												"accept_characters": "",
 												"max_len": 32,
@@ -35886,7 +35926,7 @@
 														"part": "LV_PART_MAIN",
 														"state": "LV_STATE_DEFAULT",
 														"disable": false,
-														"font": 16,
+														"font": 14,
 														"font_family": "montserratMedium",
 														"bg_color": "#ffffff",
 														"bg_grad_color": "#ffffff",
@@ -36290,7 +36330,7 @@
 												"left": 5,
 												"top": 110,
 												"visible": true,
-												"isLock": false,
+												"isLock": true,
 												"flag": [],
 												"width": 310,
 												"height": 125,
@@ -36307,7 +36347,7 @@
 														"part": "LV_PART_MAIN",
 														"state": "LV_STATE_DEFAULT",
 														"disable": false,
-														"font": 16,
+														"font": 12,
 														"font_family": "montserratMedium",
 														"bg_color": "#ffffff",
 														"bg_grad_color": "#ffffff",
@@ -37478,7 +37518,27 @@
 				"height": 240,
 				"visible": true,
 				"flag": [],
-				"event": {},
+				"event": {
+					"widget": {
+						"screen_load_start": {
+							"condition": [],
+							"action": [
+								{
+									"dst": "custom_code",
+									"bindCondi": "",
+									"actionList": {
+										"custom_code": {
+											"inc_c": "/****************** ui comm uart↓ ******************/\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_cmd.h\"\r\n#endif\r\n/****************** ui comm uart↑ ******************/",
+											"code_c": "",
+											"inc_py": "",
+											"code_py": ""
+										}
+									}
+								}
+							]
+						}
+					}
+				},
 				"style": [
 					{
 						"part": "LV_PART_MAIN",
@@ -37505,7 +37565,7 @@
 				"widgets": [
 					{
 						"name": "ui_comm_uart_ta_rx_msg",
-						"id": "zradmt8y",
+						"id": "rz83lfc7",
 						"type": "ta",
 						"visible": true,
 						"flag": [],
@@ -37518,19 +37578,19 @@
 							90
 						],
 						"default_style": false,
-						"text": "Hello World",
+						"text": "RX BUF",
 						"password_mode": false,
 						"one_line_mode": false,
 						"placeholder": "",
 						"accept_characters": "",
-						"max_len": 512,
+						"max_len": 32,
 						"password_bullet": "*",
 						"style": [
 							{
 								"part": "LV_PART_MAIN",
 								"state": "LV_STATE_DEFAULT",
 								"disable": false,
-								"font": 16,
+								"font": 12,
 								"font_family": "montserratMedium",
 								"bg_color": "#ffffff",
 								"bg_grad_color": "#ffffff",
@@ -37636,7 +37696,7 @@
 								"bg_main_stop": 0,
 								"bg_grad_stop": 255,
 								"text_color": "#0D3055",
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"border_color": "#e1e6ee",
 								"border_side": [
@@ -37838,7 +37898,7 @@
 								"bg_main_stop": 0,
 								"bg_grad_stop": 255,
 								"text_color": "#0D3055",
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"border_color": "#e1e6ee",
 								"border_side": [
@@ -38040,7 +38100,7 @@
 								"bg_main_stop": 0,
 								"bg_grad_stop": 255,
 								"text_color": "#0D3055",
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"border_color": "#e1e6ee",
 								"border_side": [
@@ -38242,7 +38302,7 @@
 								"bg_main_stop": 0,
 								"bg_grad_stop": 255,
 								"text_color": "#0D3055",
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"border_color": "#e1e6ee",
 								"border_side": [
@@ -38682,7 +38742,7 @@
 								"bg_main_stop": 0,
 								"bg_grad_stop": 255,
 								"text_color": "#0D3055",
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"border_color": "#e1e6ee",
 								"border_side": [
@@ -38950,7 +39010,7 @@
 								"bg_main_stop": 0,
 								"bg_grad_stop": 255,
 								"text_color": "#0D3055",
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"border_color": "#e1e6ee",
 								"border_side": [
@@ -39151,7 +39211,7 @@
 								"part": "LV_PART_MAIN",
 								"state": "LV_STATE_DEFAULT",
 								"disable": false,
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"bg_color": "#ffffff",
 								"bg_grad_color": "#ffffff",
@@ -39516,9 +39576,9 @@
 							30
 						],
 						"default_style": false,
-						"text": "AA BB CC DD EE FF AA BB CC",
+						"text": "",
 						"password_mode": false,
-						"one_line_mode": false,
+						"one_line_mode": true,
 						"placeholder": "",
 						"accept_characters": "",
 						"max_len": 32,
@@ -39528,7 +39588,7 @@
 								"part": "LV_PART_MAIN",
 								"state": "LV_STATE_DEFAULT",
 								"disable": false,
-								"font": 16,
+								"font": 14,
 								"font_family": "montserratMedium",
 								"bg_color": "#ffffff",
 								"bg_grad_color": "#ffffff",
@@ -39835,9 +39895,9 @@
 												"width": 310,
 												"height": 30,
 												"default_style": false,
-												"text": "AA BB CC DD EE FF AA BB CC",
+												"text": "",
 												"password_mode": false,
-												"one_line_mode": false,
+												"one_line_mode": true,
 												"placeholder": "",
 												"accept_characters": "",
 												"max_len": 32,
@@ -39847,7 +39907,7 @@
 														"part": "LV_PART_MAIN",
 														"state": "LV_STATE_DEFAULT",
 														"disable": false,
-														"font": 16,
+														"font": 14,
 														"font_family": "montserratMedium",
 														"bg_color": "#ffffff",
 														"bg_grad_color": "#ffffff",
@@ -40241,7 +40301,7 @@
 											"dst_type": "ta",
 											"_target": {
 												"name": "ta_rx_msg",
-												"id": "zradmt8y",
+												"id": "rz83lfc7",
 												"type": "ta",
 												"left": 5,
 												"top": 145,
@@ -40251,19 +40311,19 @@
 												"width": 310,
 												"height": 90,
 												"default_style": false,
-												"text": "Hello World",
+												"text": "RX BUF",
 												"password_mode": false,
 												"one_line_mode": false,
 												"placeholder": "",
 												"accept_characters": "",
-												"max_len": 512,
+												"max_len": 32,
 												"password_bullet": "*",
 												"style": [
 													{
 														"part": "LV_PART_MAIN",
 														"state": "LV_STATE_DEFAULT",
 														"disable": false,
-														"font": 16,
+														"font": 12,
 														"font_family": "montserratMedium",
 														"bg_color": "#ffffff",
 														"bg_grad_color": "#ffffff",
@@ -47287,7 +47347,7 @@
 															"actionList": {
 																"custom_code": {
 																	"inc_c": "",
-																	"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    led->enable_auto_blink(status);\r\n#endif\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
+																	"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    led->enable_auto_blink(status);\r\n    log_debug(\"LED auto blink: %d\", status);\r\n#endif\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
 																	"inc_py": "",
 																	"code_py": ""
 																}
@@ -47356,7 +47416,7 @@
 											"actionList": {
 												"custom_code": {
 													"inc_c": "",
-													"code_c": "lv_obj_t *slider = lv_event_get_target(e);\r\nui_led_slider_period_val = lv_slider_get_value(slider);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\nLV_LOG_USER(\"LED blink period: %d\", ui_led_slider_period_val);\r\n#if GUI_SIMULATOR != 1\r\n    led->set_blink_period(ui_led_slider_period_val)\r\n    log_info(\"LED blink period: %d\", ui_led_slider_period_val)\r\n#endif",
+													"code_c": "lv_obj_t *slider = lv_event_get_target(e);\r\nui_led_slider_period_val = lv_slider_get_value(slider);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\nLV_LOG_USER(\"LED blink period: %d\", ui_led_slider_period_val);\r\n#if GUI_SIMULATOR != 1\r\n    led->set_blink_period(ui_led_slider_period_val);\r\n    log_debug(\"LED blink period: %d\", ui_led_slider_period_val);\r\n#endif",
 													"inc_py": "",
 													"code_py": ""
 												}
@@ -47796,7 +47856,7 @@
 											"actionList": {
 												"custom_code": {
 													"inc_c": "",
-													"code_c": "if(status) {\r\n    ui_led_cb_sta_checked = 1;\r\n} else {\r\n    ui_led_cb_sta_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    if(status)\r\n        led->on();\r\n    else\r\n        led->off();\r\n#endif\r\nLV_LOG_USER(\"LED status: %d\", ui_led_cb_sta_checked);",
+													"code_c": "if(status) {\r\n    ui_led_cb_sta_checked = 1;\r\n} else {\r\n    ui_led_cb_sta_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    if(status)\r\n        led->on();\r\n    else\r\n        led->off();\r\n    log_debug(\"LED status: %d\", status);\r\n#endif\r\nLV_LOG_USER(\"LED status: %d\", ui_led_cb_sta_checked);",
 													"inc_py": "",
 													"code_py": ""
 												}
@@ -48076,7 +48136,7 @@
 											"actionList": {
 												"custom_code": {
 													"inc_c": "",
-													"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    led->enable_auto_blink(status);\r\n#endif\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
+													"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    led->enable_auto_blink(status);\r\n    log_debug(\"LED auto blink: %d\", status);\r\n#endif\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
 													"inc_py": "",
 													"code_py": ""
 												}

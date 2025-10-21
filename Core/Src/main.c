@@ -28,6 +28,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "driver_cmd.h"
 #include "driver_led.h"
 #include "driver_log.h"
 #include "driver_sd_fs.h"
@@ -72,6 +73,7 @@ static const hal_delay_interface_t *hal_delay = NULL;
 static const hal_gpio_interface_t *hal_gpio = NULL;
 static const driver_led_interface_t *led = NULL;
 static const driver_log_interface_t *logger = NULL;
+static const driver_cmd_interface_t *cmd = NULL;
 static const driver_touch_interface_t *touch = NULL;
 static const driver_lcd_interface_t *lcd = NULL;
 static const driver_fs_interface_t *fs = NULL;
@@ -217,6 +219,9 @@ void sys_init(void) {
 
   logger = driver_log_get_interface();
   logger->init();
+
+  cmd = driver_cmd_get_interface();
+  cmd->init();
 
   fs = driver_fs_get_interface();
   fs->init();

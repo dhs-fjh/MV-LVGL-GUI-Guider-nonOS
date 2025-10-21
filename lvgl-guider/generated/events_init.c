@@ -23,6 +23,11 @@
 /****************** ui main↑ ******************/
 
 static uint32_t *ui_comm_can_rx_msg_buf;    // 申请的内存的地址指向
+/****************** ui comm uart↓ ******************/
+#if GUI_SIMULATOR != 1
+#include "driver_cmd.h"
+#endif
+/****************** ui comm uart↑ ******************/
 #include <stdlib.h>
 #include <time.h>
 
@@ -478,6 +483,20 @@ void events_init_ui_comm_can (lv_ui *ui)
     lv_obj_add_event_cb(ui->ui_comm_can_btn_back, ui_comm_can_btn_back_event_handler, LV_EVENT_ALL, ui);
 }
 
+static void ui_comm_uart_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+    case LV_EVENT_SCREEN_LOAD_START:
+    {
+
+        break;
+    }
+    default:
+        break;
+    }
+}
+
 static void ui_comm_uart_ddlist_ch_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
@@ -552,6 +571,7 @@ static void ui_comm_uart_btn_back_event_handler (lv_event_t *e)
 
 void events_init_ui_comm_uart (lv_ui *ui)
 {
+    lv_obj_add_event_cb(ui->ui_comm_uart, ui_comm_uart_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->ui_comm_uart_ddlist_ch, ui_comm_uart_ddlist_ch_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->ui_comm_uart_sw_uart, ui_comm_uart_sw_uart_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->ui_comm_uart_btn_tx_clean, ui_comm_uart_btn_tx_clean_event_handler, LV_EVENT_ALL, ui);
@@ -680,8 +700,8 @@ static void ui_led_slider_period_event_handler (lv_event_t *e)
         lv_label_set_text(guider_ui.ui_led_label_period, buf);
         LV_LOG_USER("LED blink period: %d", ui_led_slider_period_val);
 #if GUI_SIMULATOR != 1
-        led->set_blink_period(ui_led_slider_period_val)
-        log_info("LED blink period: %d", ui_led_slider_period_val)
+        led->set_blink_period(ui_led_slider_period_val);
+        log_debug("LED blink period: %d", ui_led_slider_period_val);
 #endif
         break;
     }
@@ -708,6 +728,7 @@ static void ui_led_cb_sta_event_handler (lv_event_t *e)
             led->on();
         else
             led->off();
+        log_debug("LED status: %d", status);
 #endif
         LV_LOG_USER("LED status: %d", ui_led_cb_sta_checked);
         break;
@@ -732,6 +753,7 @@ static void ui_led_cb_blink_event_handler (lv_event_t *e)
         }
 #if GUI_SIMULATOR != 1
         led->enable_auto_blink(status);
+        log_debug("LED auto blink: %d", status);
 #endif
         LV_LOG_USER("LED auto blink: %d", ui_led_cb_blink_checked);
         break;
