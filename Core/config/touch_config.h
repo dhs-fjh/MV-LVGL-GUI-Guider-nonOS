@@ -1,0 +1,6 @@
+#ifndef __TOUCH_CONFIG_H
+#define __TOUCH_CONFIG_H
+
+#define DRIVER_TOUCH_XPT2064_ENABLE 1
+
+#endif // __TOUCH_CONFIG_H
