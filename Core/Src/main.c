@@ -75,6 +75,8 @@ static const driver_log_interface_t *logger = NULL;
 static const driver_touch_interface_t *touch = NULL;
 static const driver_lcd_interface_t *lcd = NULL;
 static const driver_fs_interface_t *fs = NULL;
+
+static __IO uint64_t lv_timer_handler_tick = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -125,14 +127,16 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM6_Init();
   MX_TIM5_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
   sys_init();
   log_info("System initialized.");
   hal_delay->delay_ms(500);
 
   ui_app_init();
-  HAL_TIM_Base_Start_IT(&htim6);
+  HAL_TIM_Base_Start_IT(&htim6); // lvgl心跳时钟
   log_info("LVGL initialized.");
+  HAL_TIM_Base_Start_IT(&htim4); // lvgl定时器处理器时钟
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -147,9 +151,12 @@ int main(void)
       touch->re_cali();
     }
 
-    // 每5ms执行一次循环
-    hal_delay->delay_ms(5);
-
+    static uint64_t last_tick = 0;
+    while ((lv_timer_handler_tick - last_tick) < 5) {
+      // 等待5ms周期到达
+      __NOP();
+    }
+    last_tick = lv_timer_handler_tick;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -223,7 +230,7 @@ void sys_init(void) {
 
   lcd->init();
   lcd->set_dir(1); // 设置显示方向：0-竖屏、1-横屏
-  lcd->string(20, 80, "Hello, Drink More Shui!", 24, WHITE, BLACK);
+  lcd->string(20, 100, "Hello, Drink More Shui!", 16, WHITE, BLACK);
 
   touch = driver_touch_get_interface();
   touch->init(lcd->xlcd->width, lcd->xlcd->height, lcd->xlcd->dir);
@@ -250,13 +257,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 1 */
   else if (htim->Instance == TIM6) {
     lv_tick_inc(1); // LVGL heartbeat: 1ms tick
-  } else if (htim->Instance == TIM5) {
+  } else if (htim->Instance == TIM5) { // 100ms
     // LED自动闪烁处理
     if (led != NULL) {
       if (led->auto_blink_enabled) {
         led->toggle();
       }
     }
+  } else if (htim->Instance == TIM4) { // 5ms
+    lv_timer_handler_tick++;
   }
   /* USER CODE END Callback 1 */
 }
