@@ -257,11 +257,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 1 */
   else if (htim->Instance == TIM6) {
     lv_tick_inc(1); // LVGL heartbeat: 1ms tick
-  } else if (htim->Instance == TIM5) { // 100ms
-    // LED自动闪烁处理
-    if (led != NULL) {
-      if (led->auto_blink_enabled) {
+  } else if (htim->Instance == TIM5) { // 1ms
+    if (led->auto_blink_enabled) {
+      static uint32_t tick = 0;
+      tick++;
+      if (tick > led->blink_period_ms) {
         led->toggle();
+        tick = 0;
       }
     }
   } else if (htim->Instance == TIM4) { // 5ms

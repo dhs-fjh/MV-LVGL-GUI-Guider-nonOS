@@ -15,6 +15,13 @@
 #include "freemaster_client.h"
 #endif
 
+/****************** ui main↓ ******************/
+#include "custom.h"
+#if GUI_SIMULATOR != 1
+#include "driver_log.h"
+#endif
+/****************** ui main↑ ******************/
+
 static uint32_t *ui_comm_can_rx_msg_buf;    // 申请的内存的地址指向
 #include <stdlib.h>
 #include <time.h>
@@ -44,9 +51,30 @@ static void rc_timer_callback(lv_timer_t *timer)
         lv_bar_set_value(get_rc_bar(ui, i), ui_comm_rc_data[i], LV_ANIM_ON);
     }
 }
-static uint32_t ui_led_slider_period_val = 500;
+/****************** ui led↓ ******************/
+static uint32_t ui_led_slider_period_val = 0;
 static bool ui_led_cb_blink_checked = 0;
 static bool ui_led_cb_sta_checked = 0;
+#if GUI_SIMULATOR != 1
+#include "driver_led.h"
+static const driver_led_interface_t *led = NULL;
+#endif
+/****************** ui led↑ ******************/
+
+
+static void ui_main_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+    case LV_EVENT_SCREEN_LOAD_START:
+    {
+
+        break;
+    }
+    default:
+        break;
+    }
+}
 
 static void ui_main_btn_pwr_event_handler (lv_event_t *e)
 {
@@ -133,6 +161,7 @@ static void ui_main_btn_settings_event_handler (lv_event_t *e)
 
 void events_init_ui_main (lv_ui *ui)
 {
+    lv_obj_add_event_cb(ui->ui_main, ui_main_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->ui_main_btn_pwr, ui_main_btn_pwr_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->ui_main_btn_io, ui_main_btn_io_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->ui_main_btn_comm, ui_main_btn_comm_event_handler, LV_EVENT_ALL, ui);
@@ -608,6 +637,13 @@ static void ui_led_event_handler (lv_event_t *e)
     switch (code) {
     case LV_EVENT_SCREEN_LOAD_START:
     {
+#if GUI_SIMULATOR != 1
+        led = driver_led_get_interface();
+        if(led->auto_blink_enabled)
+            ui_led_cb_blink_checked = 1;
+        ui_led_slider_period_val = led->blink_period_ms;
+#endif
+
         // 加载LED闪烁使能值
         if(ui_led_cb_blink_checked)
             lv_obj_add_state(guider_ui.ui_led_cb_blink, LV_STATE_CHECKED);
@@ -643,6 +679,10 @@ static void ui_led_slider_period_event_handler (lv_event_t *e)
         lv_snprintf(buf, sizeof(buf), "%4d", ui_led_slider_period_val);  // 格式化为4位数
         lv_label_set_text(guider_ui.ui_led_label_period, buf);
         LV_LOG_USER("LED blink period: %d", ui_led_slider_period_val);
+#if GUI_SIMULATOR != 1
+        led->set_blink_period(ui_led_slider_period_val)
+        log_info("LED blink period: %d", ui_led_slider_period_val)
+#endif
         break;
     }
     default:
@@ -663,6 +703,12 @@ static void ui_led_cb_sta_event_handler (lv_event_t *e)
         } else {
             ui_led_cb_sta_checked = 0;
         }
+#if GUI_SIMULATOR != 1
+        if(status)
+            led->on();
+        else
+            led->off();
+#endif
         LV_LOG_USER("LED status: %d", ui_led_cb_sta_checked);
         break;
     }
@@ -684,6 +730,9 @@ static void ui_led_cb_blink_event_handler (lv_event_t *e)
         } else {
             ui_led_cb_blink_checked = 0;
         }
+#if GUI_SIMULATOR != 1
+        led->enable_auto_blink(status);
+#endif
         LV_LOG_USER("LED auto blink: %d", ui_led_cb_blink_checked);
         break;
     }

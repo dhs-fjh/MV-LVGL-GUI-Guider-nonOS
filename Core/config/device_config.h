@@ -16,6 +16,6 @@
 // LED配置 - 复用main.h中的定义
 #define HW_LED_PORT LED_GPIO_Port
 #define HW_LED_PIN LED_Pin
-#define HW_LED_ACTIVE_LOW 0
+#define HW_LED_ACTIVE_LOW 1
 
 #endif // __DEVICE_CONFIG_H

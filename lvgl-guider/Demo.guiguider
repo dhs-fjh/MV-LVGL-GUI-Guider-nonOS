@@ -1520,7 +1520,27 @@
 					}
 				}
 			],
-			"event": {},
+			"event": {
+				"widget": {
+					"screen_load_start": {
+						"condition": [],
+						"action": [
+							{
+								"dst": "custom_code",
+								"bindCondi": "",
+								"actionList": {
+									"custom_code": {
+										"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/\r\n",
+										"code_c": "",
+										"inc_py": "",
+										"code_py": ""
+									}
+								}
+							}
+						]
+					}
+				}
+			},
 			"style": [
 				{
 					"part": "LV_PART_MAIN",
@@ -4426,7 +4446,6 @@
 							"text_color": "#000000"
 						}
 					],
-					"dropToGap": false,
 					"event": {
 						"widget": {
 							"released": {
@@ -6945,7 +6964,6 @@
 							"text_color": "#000000"
 						}
 					],
-					"dropToGap": false,
 					"event": {
 						"widget": {
 							"released": {
@@ -7478,7 +7496,6 @@
 							"radius": 10
 						}
 					],
-					"dropToGap": false,
 					"event": {
 						"widget": {
 							"value_changed": {
@@ -7835,20 +7852,6 @@
 							"bg_opa": 255
 						}
 					],
-					"undefined": [
-						{
-							"text": "LOG"
-						},
-						{
-							"text": "RC"
-						},
-						{
-							"text": "RS485"
-						},
-						{
-							"text": "hello"
-						}
-					],
 					"event": {
 						"widget": {
 							"value_changed": {
@@ -7914,8 +7917,7 @@
 								]
 							}
 						}
-					},
-					"dropToGap": false
+					}
 				},
 				{
 					"name": "ddlist_tx_fmt",
@@ -8354,8 +8356,7 @@
 							"radius": 6,
 							"bg_opa": 255
 						}
-					],
-					"dropToGap": false
+					]
 				},
 				{
 					"name": "ddlist_stop",
@@ -8563,17 +8564,6 @@
 							"radius": 3,
 							"bg_color": "#00ff00",
 							"bg_opa": 255
-						}
-					],
-					"undefined": [
-						{
-							"text": "1"
-						},
-						{
-							"text": "1.5"
-						},
-						{
-							"text": "hello"
 						}
 					]
 				},
@@ -8790,23 +8780,6 @@
 							"bg_color": "#00ff00",
 							"bg_opa": 255
 						}
-					],
-					"undefined": [
-						{
-							"text": "8"
-						},
-						{
-							"text": "9"
-						},
-						{
-							"text": "7"
-						},
-						{
-							"text": "6"
-						},
-						{
-							"text": "5"
-						}
 					]
 				},
 				{
@@ -9015,17 +8988,6 @@
 							"radius": 3,
 							"bg_color": "#00ff00",
 							"bg_opa": 255
-						}
-					],
-					"undefined": [
-						{
-							"text": "None"
-						},
-						{
-							"text": "Odd"
-						},
-						{
-							"text": "Even"
 						}
 					]
 				},
@@ -9339,6 +9301,7 @@
 					"layerName": "ui_comm_uart"
 				}
 			],
+			"event": {},
 			"style": [
 				{
 					"part": "LV_PART_MAIN",
@@ -13356,7 +13319,7 @@
 										"actionList": {
 											"custom_code": {
 												"inc_c": "",
-												"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
+												"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    led->enable_auto_blink(status);\r\n#endif\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
 												"inc_py": "",
 												"code_py": ""
 											}
@@ -13632,7 +13595,7 @@
 										"actionList": {
 											"custom_code": {
 												"inc_c": "",
-												"code_c": "if(status) {\r\n    ui_led_cb_sta_checked = 1;\r\n} else {\r\n    ui_led_cb_sta_checked = 0;\r\n}\r\nLV_LOG_USER(\"LED status: %d\", ui_led_cb_sta_checked);",
+												"code_c": "if(status) {\r\n    ui_led_cb_sta_checked = 1;\r\n} else {\r\n    ui_led_cb_sta_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    if(status)\r\n        led->on();\r\n    else\r\n        led->off();\r\n#endif\r\nLV_LOG_USER(\"LED status: %d\", ui_led_cb_sta_checked);",
 												"inc_py": "",
 												"code_py": ""
 											}
@@ -14040,7 +14003,7 @@
 										"actionList": {
 											"custom_code": {
 												"inc_c": "",
-												"code_c": "lv_obj_t *slider = lv_event_get_target(e);\r\nui_led_slider_period_val = lv_slider_get_value(slider);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\nLV_LOG_USER(\"LED blink period: %d\", ui_led_slider_period_val);",
+												"code_c": "lv_obj_t *slider = lv_event_get_target(e);\r\nui_led_slider_period_val = lv_slider_get_value(slider);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\nLV_LOG_USER(\"LED blink period: %d\", ui_led_slider_period_val);\r\n#if GUI_SIMULATOR != 1\r\n    led->set_blink_period(ui_led_slider_period_val)\r\n    log_info(\"LED blink period: %d\", ui_led_slider_period_val)\r\n#endif",
 												"inc_py": "",
 												"code_py": ""
 											}
@@ -14062,8 +14025,8 @@
 								"bindCondi": "",
 								"actionList": {
 									"custom_code": {
-										"inc_c": "static uint32_t ui_led_slider_period_val = 500;\r\nstatic bool ui_led_cb_blink_checked = 0;\r\nstatic bool ui_led_cb_sta_checked = 0;",
-										"code_c": "// 加载LED闪烁使能值\r\nif(ui_led_cb_blink_checked)\r\n    lv_obj_add_state(guider_ui.ui_led_cb_blink, LV_STATE_CHECKED);\r\n\r\n// 加载LED当前状态\r\n// ui_led_cb_sta_checked = ; // 读取LED状态\r\nif(ui_led_cb_sta_checked)\r\n    lv_obj_add_state(guider_ui.ui_led_cb_sta, LV_STATE_CHECKED);\r\n\r\n// 加载LED闪烁间隔值\r\nlv_slider_set_value(guider_ui.ui_led_slider_period, ui_led_slider_period_val, LV_ANIM_OFF);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\n\r\n",
+										"inc_c": "/****************** ui led↓ ******************/\r\nstatic uint32_t ui_led_slider_period_val = 0;\r\nstatic bool ui_led_cb_blink_checked = 0;\r\nstatic bool ui_led_cb_sta_checked = 0;\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_led.h\"\r\nstatic const driver_led_interface_t *led = NULL;\r\n#endif\r\n/****************** ui led↑ ******************/\r\n",
+										"code_c": "#if GUI_SIMULATOR != 1\r\n    led = driver_led_get_interface();\r\n    if(led->auto_blink_enabled)\r\n        ui_led_cb_blink_checked = 1;\r\n    ui_led_slider_period_val = led->blink_period_ms;\r\n#endif\r\n\r\n// 加载LED闪烁使能值\r\nif(ui_led_cb_blink_checked)\r\n    lv_obj_add_state(guider_ui.ui_led_cb_blink, LV_STATE_CHECKED);\r\n\r\n// 加载LED当前状态\r\n// ui_led_cb_sta_checked = ; // 读取LED状态\r\nif(ui_led_cb_sta_checked)\r\n    lv_obj_add_state(guider_ui.ui_led_cb_sta, LV_STATE_CHECKED);\r\n\r\n// 加载LED闪烁间隔值\r\nlv_slider_set_value(guider_ui.ui_led_slider_period, ui_led_slider_period_val, LV_ANIM_OFF);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\n\r\n",
 										"inc_py": "",
 										"code_py": ""
 									}
@@ -14136,7 +14099,27 @@
 				"height": 240,
 				"visible": true,
 				"flag": [],
-				"event": {},
+				"event": {
+					"widget": {
+						"screen_load_start": {
+							"condition": [],
+							"action": [
+								{
+									"dst": "custom_code",
+									"bindCondi": "",
+									"actionList": {
+										"custom_code": {
+											"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/\r\n",
+											"code_c": "",
+											"inc_py": "",
+											"code_py": ""
+										}
+									}
+								}
+							]
+						}
+					}
+				},
 				"style": [
 					{
 						"part": "LV_PART_MAIN",
@@ -16420,7 +16403,7 @@
 																			"actionList": {
 																				"custom_code": {
 																					"inc_c": "",
-																					"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
+																					"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    led->enable_auto_blink(status);\r\n#endif\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
 																					"inc_py": "",
 																					"code_py": ""
 																				}
@@ -16696,7 +16679,7 @@
 																			"actionList": {
 																				"custom_code": {
 																					"inc_c": "",
-																					"code_c": "if(status) {\r\n    ui_led_cb_sta_checked = 1;\r\n} else {\r\n    ui_led_cb_sta_checked = 0;\r\n}\r\nLV_LOG_USER(\"LED status: %d\", ui_led_cb_sta_checked);",
+																					"code_c": "if(status) {\r\n    ui_led_cb_sta_checked = 1;\r\n} else {\r\n    ui_led_cb_sta_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    if(status)\r\n        led->on();\r\n    else\r\n        led->off();\r\n#endif\r\nLV_LOG_USER(\"LED status: %d\", ui_led_cb_sta_checked);",
 																					"inc_py": "",
 																					"code_py": ""
 																				}
@@ -17104,7 +17087,7 @@
 																			"actionList": {
 																				"custom_code": {
 																					"inc_c": "",
-																					"code_c": "lv_obj_t *slider = lv_event_get_target(e);\r\nui_led_slider_period_val = lv_slider_get_value(slider);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\nLV_LOG_USER(\"LED blink period: %d\", ui_led_slider_period_val);",
+																					"code_c": "lv_obj_t *slider = lv_event_get_target(e);\r\nui_led_slider_period_val = lv_slider_get_value(slider);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\nLV_LOG_USER(\"LED blink period: %d\", ui_led_slider_period_val);\r\n#if GUI_SIMULATOR != 1\r\n    led->set_blink_period(ui_led_slider_period_val)\r\n    log_info(\"LED blink period: %d\", ui_led_slider_period_val)\r\n#endif",
 																					"inc_py": "",
 																					"code_py": ""
 																				}
@@ -17126,8 +17109,8 @@
 																	"bindCondi": "",
 																	"actionList": {
 																		"custom_code": {
-																			"inc_c": "static uint32_t ui_led_slider_period_val = 500;\r\nstatic bool ui_led_cb_blink_checked = 0;\r\nstatic bool ui_led_cb_sta_checked = 0;",
-																			"code_c": "// 加载LED闪烁使能值\r\nif(ui_led_cb_blink_checked)\r\n    lv_obj_add_state(guider_ui.ui_led_cb_blink, LV_STATE_CHECKED);\r\n\r\n// 加载LED当前状态\r\n// ui_led_cb_sta_checked = ; // 读取LED状态\r\nif(ui_led_cb_sta_checked)\r\n    lv_obj_add_state(guider_ui.ui_led_cb_sta, LV_STATE_CHECKED);\r\n\r\n// 加载LED闪烁间隔值\r\nlv_slider_set_value(guider_ui.ui_led_slider_period, ui_led_slider_period_val, LV_ANIM_OFF);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\n\r\n",
+																			"inc_c": "/****************** ui led↓ ******************/\r\nstatic uint32_t ui_led_slider_period_val = 0;\r\nstatic bool ui_led_cb_blink_checked = 0;\r\nstatic bool ui_led_cb_sta_checked = 0;\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_led.h\"\r\nstatic const driver_led_interface_t *led = NULL;\r\n#endif\r\n/****************** ui led↑ ******************/\r\n",
+																			"code_c": "#if GUI_SIMULATOR != 1\r\n    led = driver_led_get_interface();\r\n    if(led->auto_blink_enabled)\r\n        ui_led_cb_blink_checked = 1;\r\n    ui_led_slider_period_val = led->blink_period_ms;\r\n#endif\r\n\r\n// 加载LED闪烁使能值\r\nif(ui_led_cb_blink_checked)\r\n    lv_obj_add_state(guider_ui.ui_led_cb_blink, LV_STATE_CHECKED);\r\n\r\n// 加载LED当前状态\r\n// ui_led_cb_sta_checked = ; // 读取LED状态\r\nif(ui_led_cb_sta_checked)\r\n    lv_obj_add_state(guider_ui.ui_led_cb_sta, LV_STATE_CHECKED);\r\n\r\n// 加载LED闪烁间隔值\r\nlv_slider_set_value(guider_ui.ui_led_slider_period, ui_led_slider_period_val, LV_ANIM_OFF);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\n\r\n",
 																			"inc_py": "",
 																			"code_py": ""
 																		}
@@ -20688,7 +20671,27 @@
 														}
 													}
 												],
-												"event": {},
+												"event": {
+													"widget": {
+														"screen_load_start": {
+															"condition": [],
+															"action": [
+																{
+																	"dst": "custom_code",
+																	"bindCondi": "",
+																	"actionList": {
+																		"custom_code": {
+																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/\r\n",
+																			"code_c": "",
+																			"inc_py": "",
+																			"code_py": ""
+																		}
+																	}
+																}
+															]
+														}
+													}
+												},
 												"style": [
 													{
 														"part": "LV_PART_MAIN",
@@ -23187,7 +23190,27 @@
 														}
 													}
 												],
-												"event": {},
+												"event": {
+													"widget": {
+														"screen_load_start": {
+															"condition": [],
+															"action": [
+																{
+																	"dst": "custom_code",
+																	"bindCondi": "",
+																	"actionList": {
+																		"custom_code": {
+																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/\r\n",
+																			"code_c": "",
+																			"inc_py": "",
+																			"code_py": ""
+																		}
+																	}
+																}
+															]
+														}
+													}
+												},
 												"style": [
 													{
 														"part": "LV_PART_MAIN",
@@ -24187,7 +24210,6 @@
 																"text_color": "#000000"
 															}
 														],
-														"dropToGap": false,
 														"event": {
 															"widget": {
 																"released": {
@@ -26728,7 +26750,6 @@
 																"text_color": "#000000"
 															}
 														],
-														"dropToGap": false,
 														"event": {
 															"widget": {
 																"released": {
@@ -27261,7 +27282,6 @@
 																"radius": 10
 															}
 														],
-														"dropToGap": false,
 														"event": {
 															"widget": {
 																"value_changed": {
@@ -27618,20 +27638,6 @@
 																"bg_opa": 255
 															}
 														],
-														"undefined": [
-															{
-																"text": "LOG"
-															},
-															{
-																"text": "RC"
-															},
-															{
-																"text": "RS485"
-															},
-															{
-																"text": "hello"
-															}
-														],
 														"event": {
 															"widget": {
 																"value_changed": {
@@ -27697,8 +27703,7 @@
 																	]
 																}
 															}
-														},
-														"dropToGap": false
+														}
 													},
 													{
 														"name": "ddlist_tx_fmt",
@@ -28137,8 +28142,7 @@
 																"radius": 6,
 																"bg_opa": 255
 															}
-														],
-														"dropToGap": false
+														]
 													},
 													{
 														"name": "ddlist_stop",
@@ -28346,17 +28350,6 @@
 																"radius": 3,
 																"bg_color": "#00ff00",
 																"bg_opa": 255
-															}
-														],
-														"undefined": [
-															{
-																"text": "1"
-															},
-															{
-																"text": "1.5"
-															},
-															{
-																"text": "hello"
 															}
 														]
 													},
@@ -28573,23 +28566,6 @@
 																"bg_color": "#00ff00",
 																"bg_opa": 255
 															}
-														],
-														"undefined": [
-															{
-																"text": "8"
-															},
-															{
-																"text": "9"
-															},
-															{
-																"text": "7"
-															},
-															{
-																"text": "6"
-															},
-															{
-																"text": "5"
-															}
 														]
 													},
 													{
@@ -28798,17 +28774,6 @@
 																"radius": 3,
 																"bg_color": "#00ff00",
 																"bg_opa": 255
-															}
-														],
-														"undefined": [
-															{
-																"text": "None"
-															},
-															{
-																"text": "Odd"
-															},
-															{
-																"text": "Even"
 															}
 														]
 													},
@@ -29122,6 +29087,7 @@
 														"layerName": "ui_comm_uart"
 													}
 												],
+												"event": {},
 												"style": [
 													{
 														"part": "LV_PART_MAIN",
@@ -33872,7 +33838,27 @@
 														}
 													}
 												],
-												"event": {},
+												"event": {
+													"widget": {
+														"screen_load_start": {
+															"condition": [],
+															"action": [
+																{
+																	"dst": "custom_code",
+																	"bindCondi": "",
+																	"actionList": {
+																		"custom_code": {
+																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/\r\n",
+																			"code_c": "",
+																			"inc_py": "",
+																			"code_py": ""
+																		}
+																	}
+																}
+															]
+														}
+													}
+												},
 												"style": [
 													{
 														"part": "LV_PART_MAIN",
@@ -37492,6 +37478,7 @@
 				"height": 240,
 				"visible": true,
 				"flag": [],
+				"event": {},
 				"style": [
 					{
 						"part": "LV_PART_MAIN",
@@ -46776,7 +46763,27 @@
 														}
 													}
 												],
-												"event": {},
+												"event": {
+													"widget": {
+														"screen_load_start": {
+															"condition": [],
+															"action": [
+																{
+																	"dst": "custom_code",
+																	"bindCondi": "",
+																	"actionList": {
+																		"custom_code": {
+																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/\r\n",
+																			"code_c": "",
+																			"inc_py": "",
+																			"code_py": ""
+																		}
+																	}
+																}
+															]
+														}
+													}
+												},
 												"style": [
 													{
 														"part": "LV_PART_MAIN",
@@ -47004,8 +47011,8 @@
 									"bindCondi": "",
 									"actionList": {
 										"custom_code": {
-											"inc_c": "static uint32_t ui_led_slider_period_val = 500;\r\nstatic bool ui_led_cb_blink_checked = 0;\r\nstatic bool ui_led_cb_sta_checked = 0;",
-											"code_c": "// 加载LED闪烁使能值\r\nif(ui_led_cb_blink_checked)\r\n    lv_obj_add_state(guider_ui.ui_led_cb_blink, LV_STATE_CHECKED);\r\n\r\n// 加载LED当前状态\r\n// ui_led_cb_sta_checked = ; // 读取LED状态\r\nif(ui_led_cb_sta_checked)\r\n    lv_obj_add_state(guider_ui.ui_led_cb_sta, LV_STATE_CHECKED);\r\n\r\n// 加载LED闪烁间隔值\r\nlv_slider_set_value(guider_ui.ui_led_slider_period, ui_led_slider_period_val, LV_ANIM_OFF);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\n\r\n",
+											"inc_c": "/****************** ui led↓ ******************/\r\nstatic uint32_t ui_led_slider_period_val = 0;\r\nstatic bool ui_led_cb_blink_checked = 0;\r\nstatic bool ui_led_cb_sta_checked = 0;\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_led.h\"\r\nstatic const driver_led_interface_t *led = NULL;\r\n#endif\r\n/****************** ui led↑ ******************/\r\n",
+											"code_c": "#if GUI_SIMULATOR != 1\r\n    led = driver_led_get_interface();\r\n    if(led->auto_blink_enabled)\r\n        ui_led_cb_blink_checked = 1;\r\n    ui_led_slider_period_val = led->blink_period_ms;\r\n#endif\r\n\r\n// 加载LED闪烁使能值\r\nif(ui_led_cb_blink_checked)\r\n    lv_obj_add_state(guider_ui.ui_led_cb_blink, LV_STATE_CHECKED);\r\n\r\n// 加载LED当前状态\r\n// ui_led_cb_sta_checked = ; // 读取LED状态\r\nif(ui_led_cb_sta_checked)\r\n    lv_obj_add_state(guider_ui.ui_led_cb_sta, LV_STATE_CHECKED);\r\n\r\n// 加载LED闪烁间隔值\r\nlv_slider_set_value(guider_ui.ui_led_slider_period, ui_led_slider_period_val, LV_ANIM_OFF);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\n\r\n",
 											"inc_py": "",
 											"code_py": ""
 										}
@@ -47280,7 +47287,7 @@
 															"actionList": {
 																"custom_code": {
 																	"inc_c": "",
-																	"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
+																	"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    led->enable_auto_blink(status);\r\n#endif\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
 																	"inc_py": "",
 																	"code_py": ""
 																}
@@ -47349,7 +47356,7 @@
 											"actionList": {
 												"custom_code": {
 													"inc_c": "",
-													"code_c": "lv_obj_t *slider = lv_event_get_target(e);\r\nui_led_slider_period_val = lv_slider_get_value(slider);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\nLV_LOG_USER(\"LED blink period: %d\", ui_led_slider_period_val);",
+													"code_c": "lv_obj_t *slider = lv_event_get_target(e);\r\nui_led_slider_period_val = lv_slider_get_value(slider);\r\nchar buf[5];\r\nlv_snprintf(buf, sizeof(buf), \"%4d\", ui_led_slider_period_val);  // 格式化为4位数\r\nlv_label_set_text(guider_ui.ui_led_label_period, buf);\r\nLV_LOG_USER(\"LED blink period: %d\", ui_led_slider_period_val);\r\n#if GUI_SIMULATOR != 1\r\n    led->set_blink_period(ui_led_slider_period_val)\r\n    log_info(\"LED blink period: %d\", ui_led_slider_period_val)\r\n#endif",
 													"inc_py": "",
 													"code_py": ""
 												}
@@ -47789,7 +47796,7 @@
 											"actionList": {
 												"custom_code": {
 													"inc_c": "",
-													"code_c": "if(status) {\r\n    ui_led_cb_sta_checked = 1;\r\n} else {\r\n    ui_led_cb_sta_checked = 0;\r\n}\r\nLV_LOG_USER(\"LED status: %d\", ui_led_cb_sta_checked);",
+													"code_c": "if(status) {\r\n    ui_led_cb_sta_checked = 1;\r\n} else {\r\n    ui_led_cb_sta_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    if(status)\r\n        led->on();\r\n    else\r\n        led->off();\r\n#endif\r\nLV_LOG_USER(\"LED status: %d\", ui_led_cb_sta_checked);",
 													"inc_py": "",
 													"code_py": ""
 												}
@@ -48069,7 +48076,7 @@
 											"actionList": {
 												"custom_code": {
 													"inc_c": "",
-													"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
+													"code_c": "if(status) {\r\n    ui_led_cb_blink_checked = 1;\r\n} else {\r\n    ui_led_cb_blink_checked = 0;\r\n}\r\n#if GUI_SIMULATOR != 1\r\n    led->enable_auto_blink(status);\r\n#endif\r\nLV_LOG_USER(\"LED auto blink: %d\", ui_led_cb_blink_checked);",
 													"inc_py": "",
 													"code_py": ""
 												}
@@ -49685,7 +49692,27 @@
 														}
 													}
 												],
-												"event": {},
+												"event": {
+													"widget": {
+														"screen_load_start": {
+															"condition": [],
+															"action": [
+																{
+																	"dst": "custom_code",
+																	"bindCondi": "",
+																	"actionList": {
+																		"custom_code": {
+																			"inc_c": "/****************** ui main↓ ******************/\r\n#include \"custom.h\"\r\n#if GUI_SIMULATOR != 1\r\n#include \"driver_log.h\"\r\n#endif\r\n/****************** ui main↑ ******************/\r\n",
+																			"code_c": "",
+																			"inc_py": "",
+																			"code_py": ""
+																		}
+																	}
+																}
+															]
+														}
+													}
+												},
 												"style": [
 													{
 														"part": "LV_PART_MAIN",
