@@ -113,7 +113,7 @@ typedef struct
 	lv_obj_t *ui_comm_rc_label_tittle;
 	lv_obj_t *ui_comm_rc_btn_back;
 	lv_obj_t *ui_comm_rc_btn_back_label;
-	lv_obj_t *ui_comm_rc_cont_1;
+	lv_obj_t *ui_comm_rc_cont_rc;
 	lv_obj_t *ui_comm_rc_label_1;
 	lv_obj_t *ui_comm_rc_label_2;
 	lv_obj_t *ui_comm_rc_label_3;

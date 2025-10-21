@@ -9361,7 +9361,7 @@
 			"flag": [],
 			"list": [
 				{
-					"name": "cont_1",
+					"name": "cont_rc",
 					"id": "hc9627qx",
 					"type": "cont",
 					"left": 5,
@@ -29189,7 +29189,7 @@
 												"flag": [],
 												"list": [
 													{
-														"name": "cont_1",
+														"name": "cont_rc",
 														"id": "hc9627qx",
 														"type": "cont",
 														"left": 5,
@@ -42525,7 +42525,7 @@
 						"toggle": false
 					},
 					{
-						"name": "ui_comm_rc_cont_1",
+						"name": "ui_comm_rc_cont_rc",
 						"id": "hc9627qx",
 						"type": "cont",
 						"visible": true,
