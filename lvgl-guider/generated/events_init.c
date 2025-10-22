@@ -60,10 +60,9 @@ static void uart_scan_timer_cb(lv_timer_t *timer) {
 
             // 准备要显示的数据（可能带时间戳）
             char display_data[CMD_RX_BUFFER_SIZE + 32];
-            if (time_stamp_enabled && hal_delay) {
-                uint32_t tick = hal_delay->get_tick();
-                snprintf(display_data, sizeof(display_data), "[%lu] %s", tick,
-                         (char *)msg->data);
+            if (time_stamp_enabled) {
+                snprintf(display_data, sizeof(display_data), "[%lu] %s",
+                         msg->time_stamp, (char *)msg->data);
             } else {
                 snprintf(display_data, sizeof(display_data), "%s",
                          (char *)msg->data);
@@ -570,7 +569,9 @@ static void ui_comm_uart_event_handler (lv_event_t *e)
     switch (code) {
     case LV_EVENT_SCREEN_LOAD_START:
     {
+#if GUI_SIMULATOR != 1
         hal_delay = hal_delay_get_interface();
+#endif
         break;
     }
     case LV_EVENT_SCREEN_UNLOADED:

@@ -161,6 +161,7 @@ typedef struct
 	lv_obj_t *ui_led_label_title;
 	lv_obj_t *ui_led_btn_home;
 	lv_obj_t *ui_led_btn_home_label;
+	lv_obj_t *g_kb_top_layer;
 }lv_ui;
 
 typedef void (*ui_setup_scr_t)(lv_ui * ui);

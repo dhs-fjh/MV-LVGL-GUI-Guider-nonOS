@@ -540,7 +540,7 @@
 
 #define LV_USE_IMGBTN     0  /* Disabled to save FLASH */
 
-#define LV_USE_KEYBOARD   0  /* Required by GUI Guider */
+#define LV_USE_KEYBOARD   1  /* Required by GUI Guider */
 
 #define LV_USE_LED        0  /* Disabled to save FLASH */
 

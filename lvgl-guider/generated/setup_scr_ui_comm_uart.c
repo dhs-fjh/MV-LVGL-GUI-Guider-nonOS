@@ -711,9 +711,9 @@ void setup_scr_ui_comm_uart(lv_ui *ui)
 
     //The custom code of ui_comm_uart.
     // lv_obj_clear_state(guider_ui.ui_comm_uart_ta_rx_buf, LV_STATE_EDITED); // 关键：禁用编辑状态
-    lv_obj_clear_flag(guider_ui.ui_comm_uart_ta_rx_buf, LV_OBJ_FLAG_CLICKABLE);
-    lv_obj_clear_flag(guider_ui.ui_comm_uart_ta_rx_buf, LV_OBJ_FLAG_CLICK_FOCUSABLE);
-
+    // lv_obj_clear_flag(guider_ui.ui_comm_uart_ta_rx_buf, LV_OBJ_FLAG_CLICKABLE);
+    // lv_obj_clear_flag(guider_ui.ui_comm_uart_ta_rx_buf, LV_OBJ_FLAG_CLICK_FOCUSABLE);
+    lv_obj_remove_event_cb(ui->ui_comm_uart_ta_tx_buf, ta_event_cb);
 
     //Update current screen layout.
     lv_obj_update_layout(ui->ui_comm_uart);
