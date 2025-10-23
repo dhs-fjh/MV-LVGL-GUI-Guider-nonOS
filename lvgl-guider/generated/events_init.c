@@ -31,6 +31,8 @@ static const hal_delay_interface_t *hal_delay = NULL;
 #include "driver_cmd.h"
 
 // 静态变量：定时器
+static uart_arg_t uart_arg;
+static const driver_cmd_interface_t *cmd = NULL;
 static lv_timer_t *uart_scan_timer = NULL;
 static uint8_t current_uart_ch = 0;      // 当前选择的串口通道
 
@@ -49,57 +51,57 @@ static void uart_scan_timer_cb(lv_timer_t *timer) {
 
     // 扫描所有缓冲区，查找新数据
     for (uint8_t i = 0; i < CMD_RX_BUFFER_COUNT; i++) {
-        cmd_msg_t *msg = &(cmd->msg[i]);
+      uart_msg_t *msg = &(cmd->msg[i]);
 
-        // 检查是否有新数据（rx_flag 置位）
-        if (msg->rx_flag && msg->length > 0) {
-            // 确保数据有结束符
-            if (msg->data[msg->length] != '\0') {
-                msg->data[msg->length] = '\0';
-            }
-
-            // 准备要显示的数据（可能带时间戳）
-            char display_data[CMD_RX_BUFFER_SIZE + 32];
-            if (time_stamp_enabled) {
-                snprintf(display_data, sizeof(display_data), "[%lu] %s",
-                         msg->time_stamp, (char *)msg->data);
-            } else {
-                snprintf(display_data, sizeof(display_data), "%s",
-                         (char *)msg->data);
-            }
-
-            // 获取当前文本区内容
-            const char *current_text = lv_textarea_get_text(ui->ui_comm_uart_ta_rx_buf);
-            size_t current_len = strlen(current_text);
-            size_t new_data_len = strlen(display_data);
-
-            // 计算总长度（限制在 512 字节内）
-            size_t total_len = current_len + new_data_len + 2; // +2 for "\r\n"
-
-            if (total_len > 512) {
-                // 删除缓冲区前 256 字节，保留后面内容，然后追加新数据
-                size_t keep_start = (current_len > 256) ? (current_len - 256) : 0;
-                size_t keep_len = current_len - keep_start;
-
-                // 1. 构造新内容：保留的后面部分 + 换行 + 新数据
-                char temp_buf[512];
-                memcpy(temp_buf, current_text + keep_start, keep_len);
-                temp_buf[keep_len] = '\r';
-                temp_buf[keep_len + 1] = '\n';
-                memcpy(temp_buf + keep_len + 2, display_data, new_data_len);
-                temp_buf[keep_len + 2 + new_data_len] = '\0';
-
-                // 2. 一次性设置新内容（自动清空旧数据）
-                lv_textarea_set_text(ui->ui_comm_uart_ta_rx_buf, temp_buf);
-            } else {
-                // 追加新数据
-                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, display_data);
-                lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, "\r\n");
-            }
-
-            // 清除 rx_flag，标记已处理
-            msg->rx_flag = 0;
+      // 检查是否有新数据（rx_flag 置位）
+      if (msg->rx_flag && msg->length > 0) {
+        // 确保数据有结束符
+        if (msg->data[msg->length] != '\0') {
+          msg->data[msg->length] = '\0';
         }
+
+        // 准备要显示的数据（可能带时间戳）
+        char display_data[CMD_RX_BUFFER_SIZE + 32];
+        if (time_stamp_enabled) {
+          snprintf(display_data, sizeof(display_data), "[%lu] %s",
+                   msg->time_stamp, (char *)msg->data);
+        } else {
+          snprintf(display_data, sizeof(display_data), "%s", (char *)msg->data);
+        }
+
+        // 获取当前文本区内容
+        const char *current_text =
+            lv_textarea_get_text(ui->ui_comm_uart_ta_rx_buf);
+        size_t current_len = strlen(current_text);
+        size_t new_data_len = strlen(display_data);
+
+        // 计算总长度（限制在 512 字节内）
+        size_t total_len = current_len + new_data_len + 2; // +2 for "\r\n"
+
+        if (total_len > 512) {
+          // 删除缓冲区前 256 字节，保留后面内容，然后追加新数据
+          size_t keep_start = (current_len > 256) ? (current_len - 256) : 0;
+          size_t keep_len = current_len - keep_start;
+
+          // 1. 构造新内容：保留的后面部分 + 换行 + 新数据
+          char temp_buf[512];
+          memcpy(temp_buf, current_text + keep_start, keep_len);
+          temp_buf[keep_len] = '\r';
+          temp_buf[keep_len + 1] = '\n';
+          memcpy(temp_buf + keep_len + 2, display_data, new_data_len);
+          temp_buf[keep_len + 2 + new_data_len] = '\0';
+
+          // 2. 一次性设置新内容（自动清空旧数据）
+          lv_textarea_set_text(ui->ui_comm_uart_ta_rx_buf, temp_buf);
+        } else {
+          // 追加新数据
+          lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, display_data);
+          lv_textarea_add_text(ui->ui_comm_uart_ta_rx_buf, "\r\n");
+        }
+
+        // 清除 rx_flag，标记已处理
+        msg->rx_flag = 0;
+      }
     }
 }
 #endif
@@ -570,7 +572,8 @@ static void ui_comm_uart_event_handler (lv_event_t *e)
     case LV_EVENT_SCREEN_LOAD_START:
     {
 #if GUI_SIMULATOR != 1
-        hal_delay = hal_delay_get_interface();
+      if (!cmd)
+        cmd = driver_cmd_get_interface();
 #endif
         break;
     }
@@ -584,21 +587,6 @@ static void ui_comm_uart_event_handler (lv_event_t *e)
         }
 #endif
 
-        break;
-    }
-    default:
-        break;
-    }
-}
-
-static void ui_comm_uart_ddlist_ch_event_handler (lv_event_t *e)
-{
-    lv_event_code_t code = lv_event_get_code(e);
-    switch (code) {
-    case LV_EVENT_VALUE_CHANGED:
-    {
-        uint16_t id = lv_dropdown_get_selected(guider_ui.ui_comm_uart_ddlist_ch);
-        LV_UNUSED(id);
         break;
     }
     default:
@@ -700,12 +688,18 @@ static void ui_comm_uart_btn_back_event_handler (lv_event_t *e)
 
 void events_init_ui_comm_uart (lv_ui *ui)
 {
-    lv_obj_add_event_cb(ui->ui_comm_uart, ui_comm_uart_event_handler, LV_EVENT_ALL, ui);
-    lv_obj_add_event_cb(ui->ui_comm_uart_ddlist_ch, ui_comm_uart_ddlist_ch_event_handler, LV_EVENT_ALL, ui);
-    lv_obj_add_event_cb(ui->ui_comm_uart_sw_uart, ui_comm_uart_sw_uart_event_handler, LV_EVENT_ALL, ui);
-    lv_obj_add_event_cb(ui->ui_comm_uart_btn_tx_clean, ui_comm_uart_btn_tx_clean_event_handler, LV_EVENT_ALL, ui);
-    lv_obj_add_event_cb(ui->ui_comm_uart_btn_rx_clean, ui_comm_uart_btn_rx_clean_event_handler, LV_EVENT_ALL, ui);
-    lv_obj_add_event_cb(ui->ui_comm_uart_btn_back, ui_comm_uart_btn_back_event_handler, LV_EVENT_ALL, ui);
+  lv_obj_add_event_cb(ui->ui_comm_uart, ui_comm_uart_event_handler,
+                      LV_EVENT_ALL, ui);
+  lv_obj_add_event_cb(ui->ui_comm_uart_sw_uart,
+                      ui_comm_uart_sw_uart_event_handler, LV_EVENT_ALL, ui);
+  lv_obj_add_event_cb(ui->ui_comm_uart_btn_tx_clean,
+                      ui_comm_uart_btn_tx_clean_event_handler, LV_EVENT_ALL,
+                      ui);
+  lv_obj_add_event_cb(ui->ui_comm_uart_btn_rx_clean,
+                      ui_comm_uart_btn_rx_clean_event_handler, LV_EVENT_ALL,
+                      ui);
+  lv_obj_add_event_cb(ui->ui_comm_uart_btn_back,
+                      ui_comm_uart_btn_back_event_handler, LV_EVENT_ALL, ui);
 }
 
 static void ui_comm_rc_event_handler (lv_event_t *e)

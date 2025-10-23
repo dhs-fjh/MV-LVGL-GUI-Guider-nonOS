@@ -116,7 +116,6 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -222,6 +221,7 @@ void sys_init(void) {
 
   cmd = driver_cmd_get_interface();
   cmd->init();
+  cmd->rx_start();
 
   fs = driver_fs_get_interface();
   fs->init();
